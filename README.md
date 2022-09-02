@@ -1,6 +1,6 @@
 ## Welcome to the 2022 Consortium SNP Array Data Analysis Workshop -- session for population genetic analyses  
 
-This repository includes scripts and data associated with the practical sessions of population genetic analyses
+This repository includes scripts and data associated with the practical sessions of population genetic analyses\
 Prepared by Honggang Zhao, and Matt Hare in Sep 2022
 
 All the tutorial can be completed with the R/Rstudio. We encourge you to pre-install the R packages that needed for data analyses. These include
