@@ -22,14 +22,20 @@ Within each block we'll keep some flexibility to have questions or discussion.
 ## Part1: Handling SNP array data: VCF filtering and formatting
 
 
-The vcf file includes 65,893 SNPs and 219 inviduals. 
+The original vcf file includes 65,893 SNPs and 125 inviduals. 
+
+
 
 ```R
 vcftools  = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/vcftools_0.1.13/bin/vcftools";
 plink  = "/Users/HG/Dropbox/Mac/Documents/HG/Domestication/14_ROH/plink";
 bcftools = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/bcftools/bcftools";
+```
 
-system(paste(vcftools," --vcf example_66k_n219.vcf --maf 0.05 --max-missing 0.95 --recode --recode-INFO-all --out example_66k_n219_maf05_maxmissing95", sep=""))
+First is to filter vcf to retain SNP with minor allele frequency of 0.05 and call rate of 0.95.
+
+```R
+system(paste(vcftools," --vcf example_66k_n125.recode.vcf --maf 0.05 --max-missing 0.95 --recode --recode-INFO-all --out example_66k_n125_maf05_maxmissing95", sep=""))
 
 # VCFtools - v0.1.13
 # (C) Adam Auton and Anthony Marcketta 2009
@@ -46,7 +52,11 @@ system(paste(vcftools," --vcf example_66k_n219.vcf --maf 0.05 --max-missing 0.95
 # Outputting VCF file...
 # After filtering, kept 57570 out of a possible 65893 Sites
 # Run Time = 5.00 seconds
+```
 
+Next we filter the SNPs based on Hardy-Weinberg equilibrium 
+
+```R
 # filter for HWE
 system(paste("./filter_hwe_by_pop.pl -v example_66k_n219_maf05_maxmissing95.recode.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n219_maf05_maxmissing95_hwe"))
  
@@ -66,15 +76,20 @@ system(paste("./filter_hwe_by_pop.pl -v example_66k_n219_maf05_maxmissing95.reco
 # Processing population: NEH2 (32 inds)
 # Outputting results of HWE test for filtered loci to 'filtered.hwe'
 # Kept 55462 of a possible 57570 loci (filtered 2108 loci)
+```
+ 
+Then we evaluate the vcf file for indiviaul call rate, SNP call rate, and the allele frequency distribution
 
+```R
 # evaluate the invidual missing rate, SNP call rate and allele frequency distribution
 system(paste(vcftools," --vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf --missing-indv --out example_66k_n219_maf05_maxmissing95_hwe")
 system(paste(vcftools,"  --vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf --missing-site --out example_66k_n219_maf05_maxmissing95_hwe")
 system(paste(vcftools,"  --vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf --freq2 --max-alleles 2 --out example_66k_n219_maf05_maxmissing95_hwe")
+```
 
-# Convert to Plink format
-system(paste(plink, " --vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf --allow-extra-chr --make-bed --out example_66k_n219_maf05_maxmissing95_hwe", sep=""))
+Usually we want to perform population analyses on indepedent and neutral SNP, here we will perform a LD-clumping step.
 
+```R
 # LD clumping 
 f_name="example_66k_n219_maf05_maxmissing95_hwe"
 f_bk = paste0(f_name, ".bk")
@@ -120,8 +135,6 @@ system(paste(vcftools," --vcf ",f_name,".recode.vcf", " --snps ", f_name, "_thin
 # Outputting VCF file...
 # After filtering, kept 46008 out of a possible 55462 Sites
 # Run Time = 3.00 seconds
-
-system(paste(plink, " --vcf ",f_name,"_thinned.recode.vcf", " --allow-extra-chr --make-bed --out ", f_name,"_thinned", sep=""))
 
 ```
  
