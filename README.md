@@ -201,10 +201,10 @@ obj <- snmf("example_66k_n219_maf05_maxmissing95_hwe_thinned.geno", K = 1:10, pl
 plot(obj, col = "blue4", cex = 1.4, pch = 19) #---best is 6 here
 
 #choose the best LEA run
-best = which.min(cross.entropy(obj, K = 3))
+best = which.min(cross.entropy(obj, K = 2))
 
 # Plot ancestry proportions across samples
-barchart(obj, K=3,run=best,border=NA,space=0,
+barchart(obj, K=2,run=best,border=NA,space=0,
          col=c("red","yellow","blue"),
          xlab = "Individuals", ylab = "Ancestry proportions (K=3)")
 ```
