@@ -22,7 +22,7 @@ Within each block we'll keep some flexibility to have questions or discussion.
 ## Part1: Handling SNP array data: VCF filtering and formatting
 
 
-The original vcf file includes 65,893 SNPs and 125 inviduals. 
+The original vcf file includes 65,893 SNPs and 125 individuals. 
 
 Four populations are included here,
 
