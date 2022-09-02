@@ -163,6 +163,10 @@ ggplot(tab_pop, aes(x = EV1, y = EV2)) +
   scale_y_continuous(paste("PC2 (",round(pc.percent[2],3),"%",")",sep=""))
 ```
 
+```
+screeplot(p2)
+```
+
 ## Part3: Population structure
 
 ```R
