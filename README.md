@@ -73,15 +73,12 @@ system(paste("./filter_hwe_by_pop.pl -v example_66k_n219_maf05_maxmissing95.reco
 #    p-value cutoff for SNPs -c [cutoff] proportion of all populations that a
 #    locus can be below HWE cutoff without being filtered -o [out] name of outfile
 
-# Processing population: DBW1 (31 inds)
-# Processing population: DBW2 (32 inds)
-# Processing population: DBX2 (31 inds)
 # Processing population: LIW1 (31 inds)
 # Processing population: LIW2 (30 inds)
 # Processing population: NEH1 (32 inds)
 # Processing population: NEH2 (32 inds)
 # Outputting results of HWE test for filtered loci to 'filtered.hwe'
-# Kept 55462 of a possible 57570 loci (filtered 2108 loci)
+# Kept 53978 of a possible 55515 loci (filtered 1537 loci)
 ```
  
 Then we evaluate the vcf file for indiviaul call rate, SNP call rate, and the allele frequency distribution
