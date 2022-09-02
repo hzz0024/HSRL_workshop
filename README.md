@@ -24,6 +24,12 @@ Within each block we'll keep some flexibility to have questions or discussion.
 
 The original vcf file includes 65,893 SNPs and 125 inviduals. 
 
+Four populations are included here,
+
+LIW1\
+LIW2\
+NEH1\
+NEH2
 
 
 ```R
