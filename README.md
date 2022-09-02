@@ -164,7 +164,7 @@ ggplot(tab_pop, aes(x = EV1, y = EV2)) +
 ```
 
 ```
-screeplot(p2)
+screeplot(p2.jpeg)
 ```
 
 ## Part3: Population structure
