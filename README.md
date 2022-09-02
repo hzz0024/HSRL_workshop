@@ -32,7 +32,7 @@ plink  = "/Users/HG/Dropbox/Mac/Documents/HG/Domestication/14_ROH/plink";
 bcftools = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/bcftools/bcftools";
 ```
 
-First is to filter vcf to retain SNP with minor allele frequency of 0.05 and call rate of 0.95.
+First is to filter vcf to retain SNPs with minor allele frequency of 0.05 and call rate of 0.95.
 
 ```R
 system(paste(vcftools," --vcf example_66k_n125.recode.vcf --maf 0.05 --max-missing 0.95 --recode --recode-INFO-all --out example_66k_n125_maf05_maxmissing95", sep=""))
@@ -54,7 +54,7 @@ system(paste(vcftools," --vcf example_66k_n125.recode.vcf --maf 0.05 --max-missi
 # Run Time = 5.00 seconds
 ```
 
-Next we filter the SNPs based on Hardy-Weinberg equilibrium 
+Next we will filter the SNPs based on Hardy-Weinberg equilibrium 
 
 ```R
 # filter for HWE
