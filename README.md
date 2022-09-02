@@ -16,8 +16,7 @@ R package needed for workshop
 [SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html)\
 [ggplot2](https://ggplot2.tidyverse.org/)
 
-Here is the tentative schedule for the workshop. Within each block we'll keep some flexibility to have questions or discussion.
-![schedule](./images_tutorial/schedule.png)
+Within each block we'll keep some flexibility to have questions or discussion.
 
 
 ## Part1: Handling SNP array data: VCF filtering and formatting
