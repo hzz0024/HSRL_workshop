@@ -13,7 +13,7 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 R package needed for workshop
 
-[SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html)
+[SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html)\n
 [ggplot2](https://ggplot2.tidyverse.org/)
 
 Here is the tentative schedule for the workshop. Within each block we'll keep some flexibility to have questions or discussion.
