@@ -165,6 +165,29 @@ ggplot(tab_pop, aes(x = EV1, y = EV2)) +
 
 ## Part3: Population structure
 
+```R
+
+library(LEA)
+
+#change vcf to geno 
+LEA::vcf2geno("example_66k_n219_maf05_maxmissing95_hwe_thinned.recode.vcf",
+              output.file = "example_66k_n219_maf05_maxmissing95_hwe_thinned.geno")
+
+#modeling ancestry proportions for different K: from K=1 to K=10
+obj <- snmf("example_66k_n219_maf05_maxmissing95_hwe_thinned.geno", K = 1:10, ploidy = 2,
+            entropy = T, CPU =4, project = "new")
+
+# Find the best K from cross-entropy
+plot(obj, col = "blue4", cex = 1.4, pch = 19) #---best is 6 here
+
+#choose the best LEA run
+best = which.min(cross.entropy(obj, K = 3))
+
+# Plot ancestry proportions across samples
+barchart(obj, K=3,run=best,border=NA,space=0,
+         col=c("red","yellow","blue"),
+         xlab = "Individuals", ylab = "Ancestry proportions (K=3)")
+```
 
 
 ## Part4: Fst statistics
