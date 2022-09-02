@@ -206,7 +206,7 @@ best = which.min(cross.entropy(obj, K = 2))
 # Plot ancestry proportions across samples
 barchart(obj, K=2,run=best,border=NA,space=0,
          col=c("red","yellow","blue"),
-         xlab = "Individuals", ylab = "Ancestry proportions (K=3)")
+         xlab = "Individuals", ylab = "Ancestry proportions (K=2)")
 ```
 
 ![result](./p3.jpeg)
