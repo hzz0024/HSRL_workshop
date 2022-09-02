@@ -84,7 +84,6 @@ if (file.exists(f_bk)) {
   file.remove(f_bk)
 }
 
-# part 1 SNP clumpping and data preparation
 snp_readBed(paste0(f_name, ".bed"))
 # this will create a .rds file
 obj.bigSNP <- snp_attach(paste0(f_name, ".rds"))
