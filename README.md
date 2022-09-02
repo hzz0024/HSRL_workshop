@@ -6,10 +6,13 @@ Prepared by Honggang Zhao, and Matt Hare in Sep 2022
 All the tutorial can be completed with the R/Rstudio. We encourge you to pre-install the R packages that needed for data analyses. These include
 
 [RStudio](https://www.rstudio.com/)
+
 [How to install RStudio on Mac](https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac)
+
 [How to install RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
 
 [SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html)
+
 [ggplot2](https://ggplot2.tidyverse.org/)
 
 Here is the tentative schedule for the workshop. Within each block we'll keep some flexibility to have questions or discussion.
