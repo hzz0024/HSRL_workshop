@@ -191,6 +191,7 @@ barchart(obj, K=3,run=best,border=NA,space=0,
          xlab = "Individuals", ylab = "Ancestry proportions (K=3)")
 ```
 
+![result](./p3.jpeg)
 
 ## Part4: Fst statistics
 
@@ -219,6 +220,8 @@ Heatmap(plot_dt, name = "Pairwise Fst",
         cluster_columns = FALSE)
 
 ```
+
+![result](./p4.jpeg)
 
 ## cheatsheet for R code
 [cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
