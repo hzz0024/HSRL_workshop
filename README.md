@@ -40,7 +40,7 @@ library(SNPRelate)
 ```
 
 Tips for SNPrelate installation:
-1. Alway type ```library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed.
+1. Alway type ```library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed or not.
 2. Question: what should I do when seeing a message like this: *"Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” and “Update all/some/none? [a/s/n]”*.\
 The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version (e.g., from the Github), but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message. For question related to *“Update all/some/none? [a/s/n]”*, most the time the ```n``` option works.\
 3. Question: what should I do when seeing a message like this: *"compilation failed for package ‘SNPRelate’"*\
@@ -52,7 +52,7 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 make: *** [SNPRelate.so] Error 1
 ERROR: compilation failed for package ‘SNPRelate’
 ```
-After some Google search, I found solution [here](https://github.com/RcppCore/RcppArmadillo/issues/262) and sucessfully install the SNPRelate after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg) for my MacOS (Monterey V12.4, Apple M1).\
+After some Google search, I found a solution [here](https://github.com/RcppCore/RcppArmadillo/issues/262) and sucessfully install the SNPRelate after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg) for my MacOS (Monterey V12.4, Apple M1).\
 4. Always looking for answers by Google key words from error message. There is a whole R community supporting you.
 
 ***
