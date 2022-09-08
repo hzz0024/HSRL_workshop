@@ -3,7 +3,7 @@
 This repository includes scripts and data associated with the practical sessions of population genetic analyses\
 Prepared by Honggang Zhao, and Matt Hare in Sep 2022
 
-## Installation of R/RStudio and packages
+## Installation of R/RStudio
 
 All the tutorial can be completed with the R/Rstudio. We encourge you to pre-install the R packages and look over related tutorials that needed for data analyses. 
 
@@ -14,9 +14,8 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 [How to install RStudio on Mac](https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac)
 
 [How to install RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
-***
 
-R package needed for workshop
+## R package needed for workshop
 
 [SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html) and its basic [tutorial](https://www.bioconductor.org/packages/devel/bioc/vignettes/SNPRelate/inst/doc/SNPRelate.html)
 
@@ -56,6 +55,7 @@ ERROR: compilation failed for package ‘SNPRelate’
 After some Google search, I a solution here and sucessfully install the SNPRelate after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg) for my MacOS (Monterey V12.4, Apple M1).\
 4. Always looking for answers by Google key words from error message. There is a whole R community supporting you.
 
+***
 
 [ggplot2](https://ggplot2.tidyverse.org/)
 
