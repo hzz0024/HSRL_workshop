@@ -3,7 +3,11 @@
 This repository includes scripts and data associated with the practical sessions of population genetic analyses\
 Prepared by Honggang Zhao, and Matt Hare in Sep 2022
 
-All the tutorial can be completed with the R/Rstudio. We encourge you to pre-install the R packages that needed for data analyses. These include
+## Installation of R/RStudio and packages
+
+All the tutorial can be completed with the R/Rstudio. We encourge you to pre-install the R packages and look over related tutorials that needed for data analyses. 
+
+[R](https://www.r-project.org/)
 
 [RStudio](https://www.rstudio.com/)
 
@@ -13,7 +17,28 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 R package needed for workshop
 
-[SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html)\
+[SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html) and its basic [tutorial](https://www.bioconductor.org/packages/devel/bioc/vignettes/SNPRelate/inst/doc/SNPRelate.html)
+
+
+How to install:\
+```sh
+# To install the package SNPRelate, you need a current version (>=2.14.0) of R and the R package gdsfmt. After installing R you can run the following commands from the R command shell to install the R package SNPRelate.
+# Install the package from Bioconductor repository:
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("gdsfmt")
+BiocManager::install("SNPRelate")
+
+# Install the development version from Github:
+library("devtools")
+install_github("zhengxwen/gdsfmt")
+install_github("zhengxwen/SNPRelate")
+
+# Load the R packages: gdsfmt and SNPRelate
+library(gdsfmt)
+library(SNPRelate)
+```
+
 [ggplot2](https://ggplot2.tidyverse.org/)
 
 Within each block we'll keep some flexibility to have questions or discussion.
