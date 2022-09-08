@@ -85,7 +85,7 @@ BiocManager::install("LEA")
 
 ***
 
-Within each block we'll keep some flexibility to have questions or discussion.
+Within each block below we'll keep some flexibility to have questions or discussion.
 
 
 ## Part1: Handling SNP array data: VCF filtering and formatting
