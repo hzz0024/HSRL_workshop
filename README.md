@@ -15,7 +15,7 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 [How to install RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
 
-## R package needed for workshop
+## R packages needed for workshop
 
 [SNPRelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html): SNPrelate is a parallel computing toolset for relatedness and principal component analysis of SNP data. The tutorial of SNPRelate is [here](https://www.bioconductor.org/packages/devel/bioc/vignettes/SNPRelate/inst/doc/SNPRelate.html)
 
