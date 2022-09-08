@@ -29,7 +29,7 @@ if (!requireNamespace("BiocManager", quietly=TRUE))
 BiocManager::install("gdsfmt")
 BiocManager::install("SNPRelate")
 
-# Install the development version from Github:
+# Install the development version from Github. This will install the SNPRelate from the Github. It is the same as "install from sources the packages which need compilation"
 library("devtools")
 install_github("zhengxwen/gdsfmt")
 install_github("zhengxwen/SNPRelate")
@@ -38,6 +38,13 @@ install_github("zhengxwen/SNPRelate")
 library(gdsfmt)
 library(SNPRelate)
 ```
+
+Tips for SNPrelate installation:\
+1. Alway type ```sh"library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed.
+2. What should I do when seeing a message like this: *"Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” and “Update all/some/none? [a/s/n]”*.\
+The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version, but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message. 
+
+
 
 [ggplot2](https://ggplot2.tidyverse.org/)
 
