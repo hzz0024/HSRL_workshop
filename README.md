@@ -53,7 +53,7 @@ make: *** [SNPRelate.so] Error 1
 ERROR: compilation failed for package ‘SNPRelate’
 ```
 After some Google search, I found a solution [here](https://github.com/RcppCore/RcppArmadillo/issues/262) and sucessfully install the SNPRelate after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg) for my MacOS (Monterey V12.4, Apple M1).\
-4. Always looking for answers by Google key words from error message. There is a whole R community supporting you.
+4. Always looking for answers by Googling key words in the error message. There is a whole R community in the internet to support you.
 
 ***
 
