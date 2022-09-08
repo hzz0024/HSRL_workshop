@@ -11,9 +11,9 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 [RStudio](https://www.rstudio.com/): RStudio is an integrated environment for R, a platform helps with code running and data visulization. Note RStudio is not functional without an installation of R. So please install the R before using RStudio. 
 
-[How to install RStudio on Mac](https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac)
+[How to install R and RStudio on Mac](https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac)
 
-[How to install RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
+[How to install R and RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
 
 ## R packages needed for workshop
 
