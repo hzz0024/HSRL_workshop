@@ -9,7 +9,7 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 [R](https://www.r-project.org/): R is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. The current R version can be downloaded [here](https://cloud.r-project.org/). Please download the R for your operation system. For MacOS purchased after 2020, please install the R with Apple silicon arm64 build (e.g., [R-4.2.1-arm64.pkg](https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.2.1-arm64.pkg))
 
-[RStudio](https://www.rstudio.com/)
+[RStudio](https://www.rstudio.com/): RStudio is an integrated environment for R, a platform help with code running and visulization. Note RStudio is not functional without an installation of R. So please install the R before using RStudio. 
 
 [How to install RStudio on Mac](https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac)
 
