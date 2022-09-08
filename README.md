@@ -14,6 +14,7 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 [How to install RStudio on Mac](https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac)
 
 [How to install RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
+***
 
 R package needed for workshop
 
