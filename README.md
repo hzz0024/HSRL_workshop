@@ -17,7 +17,7 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 ## R package needed for workshop
 
-[SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html) and its basic [tutorial](https://www.bioconductor.org/packages/devel/bioc/vignettes/SNPRelate/inst/doc/SNPRelate.html)
+[SNPRelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html): SNPrelate is a parallel computing toolset for relatedness and principal component analysis of SNP data. The tutorial of SNPRelate is [here](https://www.bioconductor.org/packages/devel/bioc/vignettes/SNPRelate/inst/doc/SNPRelate.html)
 
 
 How to install:
@@ -42,7 +42,7 @@ library(SNPRelate)
 Tips for SNPrelate installation:
 1. Alway type ```library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed.
 2. Question: what should I do when seeing a message like this: *"Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” and “Update all/some/none? [a/s/n]”*.\
-The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version (e.g., from the Github), but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message.\
+The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version (e.g., from the Github), but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message. For question related to *“Update all/some/none? [a/s/n]”*, most the time the ```n``` option works.\
 3. Question: what should I do when seeing a message like this: *"compilation failed for package ‘SNPRelate’"*\
 You need to check the codes surrounding the error message and figure out where the error comes from. For example, I saw an error message during the SNPRelate installation:
 ```
@@ -58,6 +58,31 @@ After some Google search, I a solution here and sucessfully install the SNPRelat
 ***
 
 [ggplot2](https://ggplot2.tidyverse.org/)
+
+How to install:
+```
+# The easiest way to get ggplot2 is to install the whole tidyverse:
+install.packages("tidyverse")
+
+# Alternatively, install just ggplot2:
+install.packages("ggplot2")
+
+# Or the development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("tidyverse/ggplot2")
+```
+***
+
+[LEA](https://bioconductor.org/packages/release/bioc/html/LEA.html): LEA is an R package dedicated to population genomics, landscape genomics and genotype-environment association tests. The tutorial of LEA is [here](http://membres-timc.imag.fr/Olivier.Francois/LEA/files/LEA_github.pdf)
+
+How to install:
+```
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("LEA")
+```
+
 
 Within each block we'll keep some flexibility to have questions or discussion.
 
