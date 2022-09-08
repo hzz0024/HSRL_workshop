@@ -72,20 +72,6 @@ library(LEA)
 
 ***
 
-[bigsnpr]
-
-```
-# install.packages("remotes")
-remotes::install_github("privefl/bigsnpr")
-or for the CRAN version
-
-install.packages("bigsnpr")
-
-# load bigsnpr
-library(bigsnpr)
-```
-***
-
 [ggplot2](https://ggplot2.tidyverse.org/)
 
 How to install:
@@ -102,6 +88,21 @@ devtools::install_github("tidyverse/ggplot2")
 
 # load ggplot2
 library(ggplot2)
+```
+
+## Optional package for linkage disequilibrium (LD) clumping
+
+[bigsnpr](https://cran.r-project.org/web/packages/bigsnpr/readme/README.html)(optional): bigsnpr is an R package for the analysis of massive SNP arrays, primarily designed for human genetics. The tutorial of bigsnpr is [here](https://privefl.github.io/bigsnpr/index.html)
+
+```
+# install.packages("remotes")
+remotes::install_github("privefl/bigsnpr")
+or for the CRAN version
+
+install.packages("bigsnpr")
+
+# load bigsnpr
+library(bigsnpr)
 ```
 
 ***
