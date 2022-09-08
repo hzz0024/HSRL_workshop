@@ -39,10 +39,19 @@ library(gdsfmt)
 library(SNPRelate)
 ```
 
-Tips for SNPrelate installation:\
-1. Alway type ```sh"library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed.
-2. What should I do when seeing a message like this: *"Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” and “Update all/some/none? [a/s/n]”*.\
-The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version, but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message. 
+Tips for SNPrelate installation:
+1. Alway type ```"library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed.
+2. Question: what should I do when seeing a message like this: *"Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” and “Update all/some/none? [a/s/n]”*.\
+The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version (e.g., from the Github), but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message.\
+3. Question: what should I do when seeing a message like this: *"compilation failed for package ‘SNPRelate’"*\
+You need to check the codes surrounding the error message and figure out where the error comes from. For example, I saw an error message during the SNPRelate installation:
+```
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib/gcc/11'
+ld: library not found for -lquadmath
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [SNPRelate.so] Error 1
+ERROR: compilation failed for package ‘SNPRelate’
+```
 
 
 
