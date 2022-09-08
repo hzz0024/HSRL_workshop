@@ -83,6 +83,7 @@ if (!require("BiocManager", quietly = TRUE))
 BiocManager::install("LEA")
 ```
 
+***
 
 Within each block we'll keep some flexibility to have questions or discussion.
 
@@ -102,8 +103,6 @@ NEH2
 
 ```R
 vcftools  = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/vcftools_0.1.13/bin/vcftools";
-plink  = "/Users/HG/Dropbox/Mac/Documents/HG/Domestication/14_ROH/plink";
-bcftools = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/bcftools/bcftools";
 ```
 
 First is to filter vcf to retain SNPs with minor allele frequency of 0.05 and call rate of 0.95.
