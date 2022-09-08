@@ -20,7 +20,7 @@ R package needed for workshop
 [SNPrelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html) and its basic [tutorial](https://www.bioconductor.org/packages/devel/bioc/vignettes/SNPRelate/inst/doc/SNPRelate.html)
 
 
-How to install:\
+How to install:
 ```sh
 # To install the package SNPRelate, you need a current version (>=2.14.0) of R and the R package gdsfmt. After installing R you can run the following commands from the R command shell to install the R package SNPRelate.
 # Install the package from Bioconductor repository:
@@ -40,7 +40,7 @@ library(SNPRelate)
 ```
 
 Tips for SNPrelate installation:
-1. Alway type ```"library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed.
+1. Alway type ```library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed.
 2. Question: what should I do when seeing a message like this: *"Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” and “Update all/some/none? [a/s/n]”*.\
 The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version (e.g., from the Github), but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message.\
 3. Question: what should I do when seeing a message like this: *"compilation failed for package ‘SNPRelate’"*\
