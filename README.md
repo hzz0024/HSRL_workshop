@@ -52,9 +52,38 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 make: *** [SNPRelate.so] Error 1
 ERROR: compilation failed for package ‘SNPRelate’
 ```
-After some Google search, I a solution here and sucessfully install the SNPRelate after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg) for my MacOS (Monterey V12.4, Apple M1).\
+After some Google search, I found solution [here](https://github.com/RcppCore/RcppArmadillo/issues/262) and sucessfully install the SNPRelate after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg) for my MacOS (Monterey V12.4, Apple M1).\
 4. Always looking for answers by Google key words from error message. There is a whole R community supporting you.
 
+***
+
+[LEA](https://bioconductor.org/packages/release/bioc/html/LEA.html): LEA is an R package dedicated to population genomics, landscape genomics and genotype-environment association tests. The tutorial of LEA is [here](http://membres-timc.imag.fr/Olivier.Francois/LEA/files/LEA_github.pdf)
+
+How to install:
+```
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("LEA")
+
+# load LEA
+library(LEA)
+```
+
+***
+
+[bigsnpr]
+
+```
+# install.packages("remotes")
+remotes::install_github("privefl/bigsnpr")
+or for the CRAN version
+
+install.packages("bigsnpr")
+
+# load bigsnpr
+library(bigsnpr)
+```
 ***
 
 [ggplot2](https://ggplot2.tidyverse.org/)
@@ -70,17 +99,9 @@ install.packages("ggplot2")
 # Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("tidyverse/ggplot2")
-```
-***
 
-[LEA](https://bioconductor.org/packages/release/bioc/html/LEA.html): LEA is an R package dedicated to population genomics, landscape genomics and genotype-environment association tests. The tutorial of LEA is [here](http://membres-timc.imag.fr/Olivier.Francois/LEA/files/LEA_github.pdf)
-
-How to install:
-```
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("LEA")
+# load ggplot2
+library(ggplot2)
 ```
 
 ***
