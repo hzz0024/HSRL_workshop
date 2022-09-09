@@ -283,6 +283,36 @@ plot_dt
 # plot with heatmap
 pheatmap(plot_dt, display_numbers = T, cellwidth=50, cellheight=40, main="Pairwise FST")
 
+## Part5: Genetic diversity (Heterozygosity and Allelic Richness)
+
+# Genetic diversity is generally assessed by means of neutral molecular markers, and it is 
+# usually quantified by the expected heterozygosity under Hardy-Weinberg equilibrium and the number 
+# of alleles per locus or allelic richness.
+
+# Calculate the allelic richness
+Arich <- allelic.richness(df,min.n=NULL,diploid=TRUE)
+ind_mean <- colMeans(x=Arich$Ar, na.rm = TRUE)
+ind_mean
+#   LIW1     LIW2     NEH1     NEH2 
+# 1.981497 1.981681 1.961553 1.929469
+# Calculate the obverved and expected heterozygosity
+basicstat <- basic.stats(df, diploid = TRUE, digits = 2) 
+names(basicstat)
+
+# Obverved heterozygosity
+Ho <- colMeans(x=basicstat$Ho, na.rm = TRUE)
+Ho
+#   LIW1    LIW2    NEH1    NEH2 
+# 0.28779 0.29281 0.29348 0.29587 
+# Expected heterozygosity
+He <- colMeans(x=basicstat$Hs, na.rm = TRUE)
+He
+#   LIW1    LIW2    NEH1    NEH2 
+# 0.31269 0.31558 0.30919 0.30327 
+
+
+
+
 
 
 

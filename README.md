@@ -505,7 +505,7 @@ axis(1, at = 1:length(bp$order),
 FST is a relative measure of population differentiation. There are many software and formulas for FST estimation. Here we estimates pairwise FST according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
 
 ```R
-
+library(hierfstat)
 library(pheatmap)
 library(vcfR)
 
@@ -530,5 +530,39 @@ pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwi
 ```
 
 ![result](./FST.jpeg)
+
+
+## Part5: Genetic diversity (Heterozygosity and Allelic Richness)
+
+Genetic diversity is generally assessed by means of neutral molecular markers, and it is usually quantified by the expected heterozygosity under Hardy-Weinberg equilibrium and the number of alleles per locus or allelic richness.
+
+```r
+# Calculate the allelic richness
+Arich <- allelic.richness(df,min.n=NULL,diploid=TRUE)
+ind_mean <- colMeans(x=Arich$Ar, na.rm = TRUE)
+ind_mean
+#   LIW1     LIW2     NEH1     NEH2 
+# 1.981497 1.981681 1.961553 1.929469
+# Calculate the obverved and expected heterozygosity
+basicstat <- basic.stats(df, diploid = TRUE, digits = 2) 
+names(basicstat)
+
+# Obverved heterozygosity
+Ho <- colMeans(x=basicstat$Ho, na.rm = TRUE)
+Ho
+#   LIW1    LIW2    NEH1    NEH2 
+# 0.28779 0.29281 0.29348 0.29587 
+# Expected heterozygosity
+He <- colMeans(x=basicstat$Hs, na.rm = TRUE)
+He
+#   LIW1    LIW2    NEH1    NEH2 
+# 0.31269 0.31558 0.30919 0.30327 
+```
+
+## Other important analyses and pacakge:
+
+Relatedness - [Demerelate](https://www.rdocumentation.org/packages/Demerelate/versions/0.9-2/topics/Demerelate)
+
+
 
 
