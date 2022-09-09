@@ -15,44 +15,25 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 [How to install R and RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
 
+## Cheatsheet for R code
+[cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
+
 ## R packages needed for workshop
 
-[SNPRelate](https://www.bioconductor.org/packages/release/bioc/html/SNPRelate.html): SNPrelate is a parallel computing toolset for relatedness and principal component analysis of SNP data. The tutorial of SNPRelate is [here](https://www.bioconductor.org/packages/devel/bioc/vignettes/SNPRelate/inst/doc/SNPRelate.html)
-
-
-How to install:
-```sh
-# To install the package SNPRelate, you need a current version (>=2.14.0) of R and the R package gdsfmt. After installing R you can run the following commands from the R command shell to install the R package SNPRelate.
-# Install the package from Bioconductor repository:
-if (!requireNamespace("BiocManager", quietly=TRUE))
-    install.packages("BiocManager")
-BiocManager::install("gdsfmt")
-BiocManager::install("SNPRelate")
-
-# Install the development version from Github. This will install the SNPRelate from the Github. It is the same as "install from sources the packages which need compilation"
-library("devtools")
-install_github("zhengxwen/gdsfmt")
-install_github("zhengxwen/SNPRelate")
-
-# Load the R packages: gdsfmt and SNPRelate
-library(gdsfmt)
-library(SNPRelate)
-```
-
-Tips for SNPrelate installation:
-1. Alway type ```library(SNPRelate)``` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed or not.
+Tips for R package installation:
+1. Alway type `library("PACKAGE NAME")` in the [RStudio Console](https://swcarpentry.github.io/r-novice-inflammation/09-supp-intro-rstudio/index.html) to check if the package has been properly installed or not.
 2. Question: what should I do when seeing a message like this: *"Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” and “Update all/some/none? [a/s/n]”*.\
 The RStudio asks because the package has updated recently on CRAN but the binary isn't yet available for your OS. Therefore the package manager may need alternative ways to install the SNPrelate. [Yes] should update everything to its latest version (e.g., from the Github), but only if you installed the latest version of pacakge. [No] will ensure that all packages get updated, but not necessarily to their latest versions.  [cancel] will quit the installation process. I would recommand to click "Yes" and check if there is any error message. For question related to *“Update all/some/none? [a/s/n]”*, most the time the ```n``` option works.\
-3. Question: what should I do when seeing a message like this: *"compilation failed for package ‘SNPRelate’"*\
-You need to check the codes surrounding the error message and figure out where the error comes from. For example, I saw an error message during the SNPRelate installation:
+3. Question: what should I do when seeing a message like this: *"compilation failed for package ‘XXXXXX’"*\
+You need to check the codes surrounding the error message and figure out where the error comes from. For example, when one saw an error message like this:
 ```
 ld: warning: directory not found for option '-L/usr/local/gfortran/lib/gcc/11'
 ld: library not found for -lquadmath
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [SNPRelate.so] Error 1
-ERROR: compilation failed for package ‘SNPRelate’
+make: *** [‘XXXXXX’] Error 1
+ERROR: compilation failed for package ‘XXXXXX’
 ```
-After some Google search, I found a solution [here](https://github.com/RcppCore/RcppArmadillo/issues/262) and sucessfully install the SNPRelate after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg) for my MacOS (Monterey V12.4, Apple M1).\
+After some Google search, one can sucessfully install the target package after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg)\
 4. Always looking for answers by Googling key words in the error message. There is a whole R community in the internet to support you.
 
 ***
@@ -546,5 +527,4 @@ pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwi
 
 ![result](./FST.jpeg)
 
-## cheatsheet for R code
-[cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
+
