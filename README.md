@@ -544,6 +544,7 @@ ind_mean
 #   LIW1     LIW2     NEH1     NEH2 
 # 1.981497 1.981681 1.961553 1.929469
 # Calculate the obverved and expected heterozygosity
+
 basicstat <- basic.stats(df, diploid = TRUE, digits = 2) 
 names(basicstat)
 
