@@ -474,6 +474,7 @@ head(popmap)
 # run a PCA for each filtering iteration. For each iteration, a 2D plot will be output showing clustering
 # according to the specified popmap. This option is ideal for assessing the effects of missing data on
 # clustering patterns. Here we only perform PCA analysis without any threshold because we already did filtering. 
+
 assess_missing_data_pca(vcfR=vcfR, popmap = popmap, thresholds=NULL,clustering = FALSE)
 # PC1         PC2          PC3          PC4         PC5          PC6  pop missing
 # LIW2-4  -1.852227 -1.05170167  0.247838364 -0.863061906  0.24017122 -0.683284771 LIW2   0.021
@@ -485,33 +486,53 @@ assess_missing_data_pca(vcfR=vcfR, popmap = popmap, thresholds=NULL,clustering =
 
 ![result](./PCA_1.jpeg)
 
-## Part3: Population structure
+## Part3: Admixture analysis
 
-```R
+Next we will examine the individual admixture coefficients using the snmf function in LEA package. This function provides results that are very similar to programs such as STRUCTURE or Admixture. Assuming K ancestral populations, the function snmf provides least-squares estimates of ancestry proportions rather than maximum likelihood estimates (Frichot 2014). The results allow us to determine what is the best K value, i.e. the most likely number of genetic clusters.
 
+```r
+# lead LEA package
 library(LEA)
 
 #change vcf to geno 
-LEA::vcf2geno("example_66k_n219_maf05_maxmissing95_hwe_thinned.recode.vcf",
-              output.file = "example_66k_n219_maf05_maxmissing95_hwe_thinned.geno")
+LEA::vcf2geno("example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf",
+              output.file = "example_66k_n125_missing95_mac6_hwe_LD_clump.geno")
+# - number of detected individuals: 125
+# - number of detected loci:    1000
+# 
+# For SNP info, please check example_66k_n125_missing95_mac6_hwe_LD_clump.vcfsnp.
+# 
+# 0 line(s) were removed because these are not SNPs.
+# Please, check example_66k_n125_missing95_mac6_hwe_LD_clump.removed file, for more informations.
+# 
+# [1] "example_66k_n125_missing95_mac6_hwe_LD_clump.geno"
 
-#modeling ancestry proportions for different K: from K=1 to K=10
-obj <- snmf("example_66k_n219_maf05_maxmissing95_hwe_thinned.geno", K = 1:10, ploidy = 2,
+# modeling ancestry proportions for different K: from K=1 to K=10
+obj <- snmf("example_66k_n125_missing95_mac6_hwe_LD_clump.geno", K = 1:10, ploidy = 2,
             entropy = T, CPU =4, project = "new")
 
-# Find the best K from cross-entropy
-plot(obj, col = "blue4", cex = 1.4, pch = 19) #---best is 6 here
 
+# Find the best K from cross-entropy
+plot(obj, col = "blue4", cex = 1.4, pch = 19) #---best is 2 here
+```
+
+![result](./No_K.jpeg)
+
+```r
 #choose the best LEA run
 best = which.min(cross.entropy(obj, K = 2))
 
 # Plot ancestry proportions across samples
-barchart(obj, K=2,run=best,border=NA,space=0,
-         col=c("red","yellow","blue"),
-         xlab = "Individuals", ylab = "Ancestry proportions (K=2)")
+barchart(obj, K=2,run=best,border=T,space=0,
+         col=c("grey","orange"), lab=tab_pop$pop,
+         xlab = "Individuals", ylab = "Ancestry proportions (K=2)") -> bp
+
+axis(1, at = 1:length(bp$order), 
+     labels = popmap[bp$order, "id"], las = 3, 
+     cex.axis = .5)
 ```
 
-![result](./p3.jpeg)
+![result](./Ancestry_pro.jpeg)
 
 ## Part4: Fst statistics
 
