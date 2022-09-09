@@ -15,6 +15,9 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 [How to install R and RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
 
+Important note for Windows user:\
+[Rtools](https://cran.r-project.org/bin/windows/Rtools/): RTools is a set of programs that is required on Windows to build R packages from source. You can download it from [here](https://cran.r-project.org/bin/windows/Rtools/rtools40.html) and install it follow the steps. Alternatively, it will be automativly installed or updated during the BioCManager installation process.
+
 ## Cheatsheet for R code
 [Cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
 
