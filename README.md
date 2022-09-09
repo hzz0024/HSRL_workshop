@@ -517,7 +517,7 @@ axis(1, at = 1:length(bp$order),
 
 ## Part4: Fst statistics
 
-FST is a relative measure of population differentiation. There are many software and formulas for this FST estimation. Here we estimates pairwise FST among populations according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
+FST is a relative measure of population differentiation. There are many software and formulas for FST estimation. Here we estimates pairwise FST according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
 
 ```R
 
