@@ -208,6 +208,20 @@ Within each block below we'll keep some flexibility to have questions or discuss
 
 ## Part0: set up the working directory for RStudio
 
+### Step 1: unzip the compressed file for data running
+
+`Mac`\
+Double-click on the zipped file to unzip HSRL_workshop.zip file on your Mac
+
+![result](./unzip_Mac.png)
+
+`Windows`\
+
+Right-click - Extract All
+![result](./uunzip_Windows.png)
+
+
+### Step 2: set up the working directory
 ```
 #set up the working directory
 setwd("~/Desktop/HSRL_workshop")
