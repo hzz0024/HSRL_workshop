@@ -216,10 +216,12 @@ In this demo we will use a vcf file produced from SNP array and converted by Axi
 
 Four populations include,
 
-LIW1\
-LIW2\
-NEH1\
-NEH2
+|     Population                             | Abbr | N  | Salinity    | Origin          |
+|--------------------------------------------|------|----|-------------|-----------------|
+| Lloyd harbor, NY, Long Island Sound wild 1 | LIW1 | 31 | High        | Wild population |
+| Niantic Bay, CT, Long Island Sound wild 2  | LIW2 | 30 | High        | Wild population |
+| Rutgers NEH 19N1357                        | NEH1 | 32 | High, 18-23 | Selected line   |
+| Rutgers NEH 20N1                           | NEH2 | 32 | High, 18-23 | Selected line   |
 
 
 ```R
