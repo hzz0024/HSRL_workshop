@@ -312,7 +312,7 @@ head(popmap)
 ### Step 2:
 #### Quality filtering for missing data and minor allele counts
 
-# Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
+Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
 ```r
 vcf_mac = min_mac(vcfR, min.mac = 6)
 # 5.32% of SNPs fell below a minor allele count of 6 and were removed from the VCF
