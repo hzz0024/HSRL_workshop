@@ -206,6 +206,18 @@ library(bigsnpr)
 
 Within each block below we'll keep some flexibility to have questions or discussion.
 
+## Part0: set up the working directory for RStudio
+
+```
+#set up the working directory
+setwd("~/Desktop/HSRL_workshop")
+```
+
+Or click Session-Set Working Directory-Choose Directory and direct to HSRL_workshop in the Desktop
+
+![result](./Seesion_Mac.png)
+
+
 
 ## Part1: Handling SNP array data: VCF filtering and formatting
 
@@ -222,6 +234,44 @@ Four populations include,
 | Niantic Bay, CT, Long Island Sound wild 2  | LIW2 | 30 | High        | Wild population |
 | Rutgers NEH 19N1357                        | NEH1 | 32 | High, 18-23 | Selected line   |
 | Rutgers NEH 20N1                           | NEH2 | 32 | High, 18-23 | Selected line   |
+
+### Step 1:
+
+#### load vcf using SNPfiltR and snpR
+
+```r
+library(SNPfiltR)
+#This is SNPfiltR v.1.0.0
+
+#Detailed usage information is available at: devonderaad.github.io/SNPfiltR/ 
+
+#If you use SNPfiltR in your published work, please cite the following papers: 
+
+#DeRaad, D.A. (2022), SNPfiltR: an R package for interactive and reproducible SNP filtering. Molecular Ecology Resources, 00, 1-15. http://doi.org/10.1111/1755-0998.13618 
+
+#Knaus, Brian J., and Niklaus J. Grunwald. 2017. VCFR: a package to manipulate and visualize variant call format data in R. Molecular Ecology Resources, 17.1:44-53. http://doi.org/10.1111/1755-0998.12549
+library(vcfR)
+#   *****       ***   vcfR   ***       *****
+#   This is vcfR 1.13.0 
+#     browseVignettes('vcfR') # Documentation
+#     citation('vcfR') # Citation
+#   *****       *****      *****       *****
+```
+
+```r
+#set up the working directory
+
+```
+
+```r
+#read in vcf as vcfR
+vcfR <- read.vcfR("~/example_66k_n125.recode.vcf")
+```
+
+
+
+
+
 
 
 ```R
