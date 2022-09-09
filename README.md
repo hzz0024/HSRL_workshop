@@ -359,8 +359,8 @@ Linkage disequilibrium can particularly bias the downstrem population genetic an
 
 ```R
 library(bigsnpr)
-plink  = "/Users/HG/Dropbox/Mac/Documents/HG/Domestication/14_ROH/plink";
-vcftools  = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/vcftools_0.1.13/bin/vcftools";
+plink  = "/PATH TO/plink";
+vcftools  = "/PATH TO/vcftools";
 
 system(paste(plink, " --vcf example_66k_n125_missing95_mac6_hwe.recode.vcf --allow-extra-chr --make-bed --out example_66k_n125_missing95_mac6_hwe", sep=""))
 # LD clumping 
