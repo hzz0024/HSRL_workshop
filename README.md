@@ -239,9 +239,9 @@ Or click Session-Set Working Directory-Choose Directory and direct to HSRL_works
 
 The Variant Call Format (VCF) file is a data format produced by variant calling software (e.g. Axiom Analysis Suite, GATK, FreeBayes, SAMtools). It contains the information for polymorphic loci (variants) present in the sample or population. The variants can be single nucleotide polymorphism (SNP) or a stretch of insertions or deletions (INDEL). In the VCF file, the variant data is normally represented by 8 columns (#CHROM, POS, ID, REF, ALT, QUAL, FILTER and INFO). The INFO columns contain additional information about the variants, for details of the columns headers please see [here](https://www.reneshbedre.com/blog/vcf-fields.html). 
 
-In this demo we will use a vcf file produced from SNP array and converted by Axiom Analysis Suite. The file includes 65,893 SNPs (i.e., 66K array markers) and 125 individuals. 
+In this demo we will use a vcf file produced from SNP array and converted by Axiom Analysis Suite. The file includes 65,893 SNPs (i.e., 66K array markers) and 125 individuals from four populations. 
 
-Four populations include,
+Detailed information for four populations,
 
 |     Population                             | Abbr | N  | Salinity    | Origin          |
 |--------------------------------------------|------|----|-------------|-----------------|
