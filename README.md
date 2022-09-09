@@ -339,6 +339,7 @@ missing_by_snp(vcfR)
 # 11 1.00 0.000000000         29965
 ```
 
+![result](./SNP_completeness_vs_sample_missing.jpeg)
 
 
 
