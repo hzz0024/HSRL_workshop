@@ -33,7 +33,7 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 make: *** [‘XXXXXX’] Error 1
 ERROR: compilation failed for package ‘XXXXXX’
 ```
-After some Google search, one can sucessfully install the target package after reinstall the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg)\
+After some Google search, one can sucessfully install the target package by re-installing the [gfortran](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg)\
 4. Always looking for answers by Googling key words in the error message. There is a whole R community in the internet to support you.
 
 ***
