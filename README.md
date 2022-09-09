@@ -139,35 +139,16 @@ library(SNPfiltR)
 
 ## R Visualization tools 
 
-***
-[ComplexHeatmap](https://www.bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html): Complex heatmaps are efficient to visualize associations between different sources of data sets and reveal potential patterns. Here the ComplexHeatmap package provides a highly flexible way to arrange multiple heatmaps and supports various annotation graphics. The book of ComplexHeatmap is [here](https://jokergoo.github.io/ComplexHeatmap-reference/book/)
-
-How to install:
-```
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("ComplexHeatmap")
-
-# load ComplexHeatmap
-library(ComplexHeatmap)
-```
-
-***
-[circlize](https://cran.r-project.org/web/packages/circlize/index.html): circlize package provides an implementation of circular layout generation in R as well as some visuilization options. The book of circlize is [here](https://jokergoo.github.io/circlize_book/book/)
+[pheatmap](https://www.rdocumentation.org/packages/pheatmap/versions/1.0.12/topics/pheatmap): A function to draw clustered heatmaps where one has better control over some graphical parameters such as cell size, etc. The tutorial of pheatmap is [here](https://davetang.org/muse/2018/05/15/making-a-heatmap-in-r-with-the-pheatmap-package/)
 
 How to install:
 ```
 #The package can be installed from CRAN:
-install.packages("circlize")
+install.packages("pheatmap")
 
-# directly from GitHub:
-devtools::install_github("jokergoo/circlize")
-
-# load circlize
-library(circlize)
+# load pheatmap
+library(pheatmap)
 ```
-
 ***
 [ggplot2](https://ggplot2.tidyverse.org/)
 
@@ -536,32 +517,34 @@ axis(1, at = 1:length(bp$order),
 
 ## Part4: Fst statistics
 
-```R
-library(hierfstat)
-library(vcfR)
-library(ComplexHeatmap)
-library(circlize)
+FST is a relative measure of population differentiation. There are many software and formulas for this FST estimation. Here we estimates pairwise FST among populations according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
 
-# load the population information
-tab_pop <- read.delim("sample_eigen_219.txt", header = TRUE, sep='\t')
-tab_pop$pop = stringr::str_remove(tab_pop$sample.id, "-[0-9]+")
+```R
+
+library(pheatmap)
+library(vcfR)
+
 # load vcf file and convert it to genind format
-vcf_file = "example_66k_n219_maf05_maxmissing95_hwe_thinned.recode.vcf"
+vcf_file = "example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf"
 vcf <- read.vcfR(vcf_file, verbose = FALSE)
 df <- vcfR2genind(vcf)
-df@pop <- factor(tab_pop$pop)
+df@pop <- factor(popmap$pop)
+# calculate pairwise FST using Weir and Cockerham (1984)
 pairwise_fst <- genet.dist(df, method = "WC84") # Estimates pairwise FSTs according to Weir and Cockerham (1984)
-
+# convert the output into matrix
 plot_dt <- as.matrix(pairwise_fst)
+plot_dt
+#           LIW1         LIW2       NEH1       NEH2
+# LIW1 0.0000000000 0.0001369757 0.07207295 0.08302061
+# LIW2 0.0001369757 0.0000000000 0.06707238 0.07771447
+# NEH1 0.0720729493 0.0670723811 0.00000000 0.01480227
+# NEH2 0.0830206064 0.0777144688 0.01480227 0.00000000
 
-Heatmap(plot_dt, name = "Pairwise Fst",
-        col = colorRamp2(c(0, 0.05, 0.1), c("white", "skyblue", "orange")),
-        rect_gp = gpar(col = "white", lwd = 2),
-        cluster_rows = FALSE, 
-        cluster_columns = FALSE)
-
+# plot with heatmap
+pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwise FST")
 ```
 
+![result](./FST.jpeg)
 
 
 
