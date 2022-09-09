@@ -56,7 +56,6 @@ After some Google search, I found a solution [here](https://github.com/RcppCore/
 4. Always looking for answers by Googling key words in the error message. There is a whole R community in the internet to support you.
 
 ***
-
 [LEA](https://bioconductor.org/packages/release/bioc/html/LEA.html): LEA is an R package dedicated to population genomics, landscape genomics and genotype-environment association tests. The tutorial of LEA is [here](http://membres-timc.imag.fr/Olivier.Francois/LEA/files/LEA_github.pdf)
 
 How to install:
@@ -71,17 +70,105 @@ library(LEA)
 ```
 
 ***
-[SNPfiltR](https://devonderaad.github.io/SNPfiltR/index.html):
+[hierfstat](https://cran.r-project.org/web/packages/hierfstat/index.html): The hierfstat package is intended for the analysis of population structure using genetic markers. It is suitable for both haploid and diploid data. In particular, it contains functions to estimate and test hierarchical F-statistics for any number of hierarchical levels.. The tutorial of hierfstat is [here](https://cran.r-project.org/web/packages/hierfstat/vignettes/hierfstat.html)
 
-```#Install current release from CRAN
+How to install:
+```
+You will need the package devtools to be able to install the devel version of hierfstat. To install devtools:
+
+install.packages("devtools")
+
+#install hierfstat from devtools:
+library(devtools)
+install_github("jgx65/hierfstat")
+
+# load hierfstat
+library(hierfstat)
+```
+
+Tips for hierfstat installation:
+A message will appear during hierfstat installation:
+
+```
+Loading required package: usethis
+> install_github("jgx65/hierfstat")
+Downloading GitHub repo jgx65/hierfstat@HEAD
+These packages have more recent versions available.
+It is recommended to update all of them.
+Which would you like to update?
+
+1: All                           
+2: CRAN packages only            
+3: None                          
+4: httpuv (1.6.5 -> 1.6.6) [CRAN]
+
+Enter one or more numbers, or an empty line to skip updates:
+```
+An empty line is fine for installation.
+
+***
+[vcfR](https://cran.r-project.org/web/packages/vcfR/index.html): vcfR is an R package that facilitates easy manipulation of variant call format (VCF) data. The tutorial of vcfR is [here](https://cran.r-project.org/web/packages/vcfR/vignettes/intro_to_vcfR.html)
+
+How to install:
+```
+# install the BiocManager from CRAN using the base R install.packages() function
+install.packages("BiocManager")
+
+# install the vcfR package from bioconductor using BiocManager::install()
+BiocManager::install("vcfR")
+
+# load vcfR
+library(vcfR)
+```
+
+***
+[SNPfiltR](https://devonderaad.github.io/SNPfiltR/index.html): SNPfiltR is an R package to streamline and automate the process of choosing appropriate filtering parameters for next-gen SNP datasets. The tutorial of SNPfiltR is [here](https://devonderaad.github.io/SNPfiltR/articles/reproducible-vignette.html)
+
+How to install:
+```
+#Install current release from CRAN
 install.packages("SNPfiltR")
 
 #Install current development version directly from GitHub
 library(devtools)
 install_github("DevonDeRaad/SNPfiltR")
-```
-***
 
+# load SNPfiltR
+library(SNPfiltR)
+```
+
+## R Visualization tools 
+
+***
+[ComplexHeatmap](https://www.bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html): Complex heatmaps are efficient to visualize associations between different sources of data sets and reveal potential patterns. Here the ComplexHeatmap package provides a highly flexible way to arrange multiple heatmaps and supports various annotation graphics. The book of ComplexHeatmap is [here](https://jokergoo.github.io/ComplexHeatmap-reference/book/)
+
+How to install:
+```
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ComplexHeatmap")
+
+# load ComplexHeatmap
+library(ComplexHeatmap)
+```
+
+***
+[circlize](https://cran.r-project.org/web/packages/circlize/index.html): circlize package provides an implementation of circular layout generation in R as well as some visuilization options. The book of circlize is [here](https://jokergoo.github.io/circlize_book/book/)
+
+How to install:
+```
+#The package can be installed from CRAN:
+install.packages("circlize")
+
+# directly from GitHub:
+devtools::install_github("jokergoo/circlize")
+
+# load circlize
+library(circlize)
+```
+
+***
 [ggplot2](https://ggplot2.tidyverse.org/)
 
 How to install:
