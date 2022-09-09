@@ -274,13 +274,48 @@ library(vcfR)
 ```
 
 ```r
-#set up the working directory
-
+#read in vcf as vcfR
+vcfR <- read.vcfR("./example_66k_n125.recode.vcf")
+# Scanning file to determine attributes.
+# File attributes:
+#   meta lines: 416
+# header_line: 417
+# variant count: 65893
+# column count: 134
+# Meta line 416 read in.
+# All meta lines processed.
+# gt matrix initialized.
+# Character matrix gt created.
+# Character matrix gt rows: 65893
+# Character matrix gt cols: 134
+# skip: 0
+# nrows: 65893
+# row_num: 0
+# Processed variant: 65893
+# All variants processed
 ```
 
 ```r
-#read in vcf as vcfR
-vcfR <- read.vcfR("~/example_66k_n125.recode.vcf")
+#generate popmap file. Two column popmap with 'id' and 'pop'
+popmap<-data.frame(id=colnames(vcfR@gt)[2:length(colnames(vcfR@gt))],pop=substr(colnames(vcfR@gt)[2:length(colnames(vcfR@gt))], 1,4))
+#check the first few content in popmap
+head(popmap)
+#        id  pop
+# 1  LIW2-4 LIW2
+# 2 LIW2-12 LIW2
+# 3 LIW2-20 LIW2
+# 4 LIW2-28 LIW2
+# 5  LIW1-5 LIW1
+# 6 LIW1-13 LIW1
+```
+
+### Step 2:
+#### Quality filtering for missing data and minor allele counts
+
+# Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
+```r
+vcf_mac = min_mac(vcfR, min.mac = 6)
+# 5.32% of SNPs fell below a minor allele count of 6 and were removed from the VCF
 ```
 
 
