@@ -546,7 +546,5 @@ pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwi
 
 ![result](./FST.jpeg)
 
-
-
 ## cheatsheet for R code
 [cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
