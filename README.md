@@ -330,6 +330,7 @@ missing_by_snp(vcfR)
 # 10 0.95 0.008457778         64800
 # 11 1.00 0.000000000         29965
 ```
+
 ![result](./SNP_completeness_vs_sample_missing.jpeg)
 
 Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
@@ -345,6 +346,7 @@ vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 # cutoff is specified, filtered vcfR object will be returned
 # 1.66% of SNPs fell below a completeness cutoff of 0.95 and were removed from the VCF
 ```
+
 ![result](./SNP_completeness_cutoff.jpeg)
 
 
