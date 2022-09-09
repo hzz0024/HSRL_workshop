@@ -562,7 +562,7 @@ Heatmap(plot_dt, name = "Pairwise Fst",
 
 ```
 
-<img src="https://github.com/hzz0024/HSRL_workshop/blob/main/Ancestry_pro.jpeg" width=50% height=50%>
+
 
 
 ## cheatsheet for R code
