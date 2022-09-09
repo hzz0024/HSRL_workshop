@@ -4,6 +4,33 @@
 # This repository includes scripts and data associated with the practical sessions of population genetic analyses
 # Prepared by Honggang Zhao, and Matt Hare in Sep 2022
 
+# Install the R package, please skip this block if you have already installed the package in your system
+
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("LEA")
+BiocManager::install("vcfR")
+
+install.packages("devtools")
+#install hierfstat from devtools:
+library(devtools)
+install_github("jgx65/hierfstat")
+
+install.packages("SNPfiltR")
+install.packages("pheatmap")
+install.packages("ggplot2")
+install.packages("bigsnpr")
+
+# load packages
+library(LEA)
+library(vcfR)
+library(hierfstat)
+library(SNPfiltR)
+library(pheatmap)
+library(ggplot2)
+library(bigsnpr)
+
 ## Part0: set up the working directory for RStudio
 #set up the working directory
 setwd("~/Desktop/HSRL_workshop-main")
@@ -86,11 +113,11 @@ vcfR::write.vcf(vcf_missing_mac, "./example_66k_n125_missing95_mac6.vcf.gz")
 # Detailed command is shown below,
 # filter_hwe_by_pop.pl -v <vcffile> -p <popmap> [options]
 # Options:
-# -v     <vcf_file>	input vcf file
-# -p		<popmap>	tab-separated file of samples and population designations
-# -h		[hwe]	minimum Hardy-Weinberg p-value cutoff for SNPs
-# -c		[cutoff]	proportion of all populations that a locus can be below HWE cutoff without being filtered
-# -o		[out]	name of outfile
+# -v     <vcf_file> input vcf file
+# -p    <popmap>  tab-separated file of samples and population designations
+# -h    [hwe] minimum Hardy-Weinberg p-value cutoff for SNPs
+# -c    [cutoff]  proportion of all populations that a locus can be below HWE cutoff without being filtered
+# -o    [out] name of outfile
 
 
 # load R.utils
@@ -197,8 +224,8 @@ library(LEA)
 #change vcf to geno 
 LEA::vcf2geno("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf",
               output.file = "example_66k_n125_missing95_mac6_hwe_LD_clump.geno")
-# - number of detected individuals:	125
-# - number of detected loci:		1000
+# - number of detected individuals: 125
+# - number of detected loci:    1000
 # 
 # For SNP info, please check example_66k_n125_missing95_mac6_hwe_LD_clump.vcfsnp.
 # 
@@ -233,7 +260,7 @@ axis(1, at = 1:length(bp$order),
 # from the hierfstat package can estimate some other different genetic distances between populations as described mostly 
 # in Takezaki & Nei (1996). See https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist for 
 # detailed information
-
+library(hierfstat)
 library(pheatmap)
 library(vcfR)
 
