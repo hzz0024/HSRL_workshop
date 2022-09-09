@@ -215,10 +215,10 @@ setwd("~/Desktop/HSRL_workshop")
 
 Or click Session-Set Working Directory-Choose Directory and direct to HSRL_workshop in the Desktop
 
-`Mac`
+`Mac`\
 ![result](./Seesion_Mac.png)
 
-`Windows`
+`Windows`\
 ![result](./Seesion_Windows.png)
 
 ## Part1: Handling SNP array data: VCF filtering and formatting
