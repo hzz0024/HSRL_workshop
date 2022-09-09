@@ -211,12 +211,11 @@ Within each block below we'll keep some flexibility to have questions or discuss
 ### Step 1: Unzip the compressed file at Desktop
 
 `Mac`\
-Double-click on the zipped file to unzip HSRL_workshop.zip file on your Mac\
+Double-click on the zipped file to unzip HSRL_workshop.zip file on your Mac
 
 ![result](./unzip_Mac.png)
 
 `Windows`\
-
 Right-click - Extract All\
 ![result](./unzip_Windows.png)
 
