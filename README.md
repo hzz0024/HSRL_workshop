@@ -318,6 +318,28 @@ vcf_mac = min_mac(vcfR, min.mac = 6)
 # 5.32% of SNPs fell below a minor allele count of 6 and were removed from the VCF
 ```
 
+Checking missing data by SNP and the effect of various cutoffs on the missingness of each sample
+
+```r
+missing_by_snp(vcfR)
+
+# cutoff is not specified, exploratory visualizations will be generated
+# Picking joint bandwidth of 0.0318
+# filt missingness snps.retained
+# 1  0.30 0.009288421         65668
+# 2  0.50 0.009288421         65668
+# 3  0.60 0.009288421         65668
+# 4  0.65 0.009288421         65668
+# 5  0.70 0.009288421         65668
+# 6  0.75 0.009288421         65668
+# 7  0.80 0.009268435         65662
+# 8  0.85 0.009231435         65647
+# 9  0.90 0.009128934         65584
+# 10 0.95 0.008457778         64800
+# 11 1.00 0.000000000         29965
+```
+
+
 
 
 
