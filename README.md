@@ -338,6 +338,14 @@ vcf_mac = min_mac(vcfR, min.mac = 6)
 # 5.32% of SNPs fell below a minor allele count of 6 and were removed from the VCF
 ```
 
+Choose a value that retains an acceptable amount of missing data in each SNP, here we require that each SNP with <5% missing data
+
+```r
+vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
+# cutoff is specified, filtered vcfR object will be returned
+# 1.66% of SNPs fell below a completeness cutoff of 0.95 and were removed from the VCF
+```
+![result](./SNP_completeness_cutoff.jpeg)
 
 
 
