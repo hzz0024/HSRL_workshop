@@ -16,7 +16,7 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 [How to install R and RStudio on Windows](https://techvidvan.com/tutorials/install-r/#install-r-windows)
 
 ## Cheatsheet for R code
-[cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
+[Cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
 
 ## R packages needed for workshop
 
