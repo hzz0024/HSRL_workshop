@@ -41,7 +41,7 @@ library(SNPfiltR)
 library(vcfR)
 
 #read in vcf as vcfR
-vcfR <- read.vcfR("./example_66k_n125.recode.vcf")
+vcfR <- read.vcfR("./Example_data/example_66k_n125.recode.vcf")
 
 ### Step 2:
 #### Quality filtering for missing data and minor allele counts

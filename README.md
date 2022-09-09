@@ -241,7 +241,7 @@ library(vcfR)
 
 ```r
 #read in vcf as vcfR
-vcfR <- read.vcfR("./example_66k_n125.recode.vcf")
+vcfR <- read.vcfR("./Example_data/example_66k_n125.recode.vcf")
 # Scanning file to determine attributes.
 # File attributes:
 #   meta lines: 416
@@ -343,7 +343,7 @@ library(R.utils)
 # uncompressed the vcf.gz
 gunzip("./example_66k_n125_missing95_mac6.vcf.gz", remove=FALSE)
 # filter_hwe_by_pop.pl for SNP HWE filtering. The input is vcf file after minor allele count and missing rate filtering.
-system(paste("./filter_hwe_by_pop.pl -v example_66k_n125_missing95_mac6.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n125_missing95_mac6_hwe"))
+system(paste("./Script/filter_hwe_by_pop.pl -v example_66k_n125_missing95_mac6.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n125_missing95_mac6_hwe"))
 # Processing population: LIW1 (31 inds)
 # Processing population: LIW2 (30 inds)
 # Processing population: NEH1 (32 inds)
@@ -418,7 +418,7 @@ library(SNPfiltR)
 library(vcfR)
 
 #read in vcf as vcfR
-vcfR <- read.vcfR("./example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf")
+vcfR <- read.vcfR("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf")
 
 #generate popmap file. Two column popmap with 'id' and 'pop'
 popmap<-data.frame(id=colnames(vcfR@gt)[2:length(colnames(vcfR@gt))],pop=substr(colnames(vcfR@gt)[2:length(colnames(vcfR@gt))], 1,4))
@@ -461,7 +461,7 @@ Next we will examine the individual admixture coefficients using the snmf functi
 library(LEA)
 
 #change vcf to geno 
-LEA::vcf2geno("example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf",
+LEA::vcf2geno("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf",
               output.file = "example_66k_n125_missing95_mac6_hwe_LD_clump.geno")
 # - number of detected individuals: 125
 # - number of detected loci:    1000
@@ -474,7 +474,7 @@ LEA::vcf2geno("example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf",
 # [1] "example_66k_n125_missing95_mac6_hwe_LD_clump.geno"
 
 # modeling ancestry proportions for different K: from K=1 to K=10
-obj <- snmf("example_66k_n125_missing95_mac6_hwe_LD_clump.geno", K = 1:10, ploidy = 2,
+obj <- snmf("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.geno", K = 1:10, ploidy = 2,
             entropy = T, CPU =4, project = "new")
 
 
@@ -510,7 +510,7 @@ library(pheatmap)
 library(vcfR)
 
 # load vcf file and convert it to genind format
-vcf_file = "example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf"
+vcf_file = "./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf"
 vcf <- read.vcfR(vcf_file, verbose = FALSE)
 df <- vcfR2genind(vcf)
 df@pop <- factor(popmap$pop)
