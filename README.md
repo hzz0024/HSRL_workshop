@@ -333,14 +333,8 @@ missing_by_snp(vcfR)
 
 ![result](./SNP_completeness_vs_sample_missing.jpeg)
 
-Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
-```r
-vcf_mac = min_mac(vcfR, min.mac = 6)
-# 5.32% of SNPs fell below a minor allele count of 6 and were removed from the VCF
-```
 
 Choose a value that retains an acceptable amount of missing data in each SNP, here we require that each SNP with <5% missing data
-
 ```r
 vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 # cutoff is specified, filtered vcfR object will be returned
@@ -349,80 +343,67 @@ vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 
 ![result](./SNP_completeness_cutoff.jpeg)
 
+Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
+```r
+vcf_missing_mac = min_mac(vcfR_missing, min.mac = 6)
+# 5% of SNPs fell below a minor allele count of 6 and were removed from the VCF
+``` 
 
-
-
-
-
-
-
-```R
-vcftools  = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/vcftools_0.1.13/bin/vcftools";
+Write out vcf files for downstream analyses.
+```r
+vcfR::write.vcf(vcf_missing_mac, "./example_66k_n125_missing95_mac6.vcf.gz")
 ```
 
-First is to filter vcf to retain SNPs with minor allele frequency of 0.05 and call rate of 0.95.
+### Step 3 (Optional):
+#### Quality filter the SNPs based on Hardy-Weinberg equilibrium (HWE). 
 
-```R
-system(paste(vcftools," --vcf example_66k_n125.recode.vcf --maf 0.05 --max-missing 0.95 --recode --recode-INFO-all --out example_66k_n125_maf05_maxmissing95", sep=""))
+Here we will use a Perl script from dDocent pipeline to filter out SNPs based on HWE. The HWE test is not supposed to be conducted across the board, since population structure will create departures from HWE. We need to apply this by population. This script is a Perl wrapper for vcftools. One need to install the vcftools before running the script. Therefore this step 3 is an optional step. 
 
-# VCFtools - v0.1.13
-# (C) Adam Auton and Anthony Marcketta 2009
+Detailed command is shown below,
 
-# Parameters as interpreted:
-# 	--vcf example_66k_n219.vcf
-# 	--recode-INFO-all
-# 	--maf 0.05
-# 	--max-missing 0.95
-# 	--out example_66k_n219_maf05_maxmissing95
-# 	--recode
-
-# After filtering, kept 219 out of 219 Individuals
-# Outputting VCF file...
-# After filtering, kept 57570 out of a possible 65893 Sites
-# Run Time = 5.00 seconds
+```r
+filter_hwe_by_pop.pl -v <vcffile> -p <popmap> [options]
+Options:
+-v    vcf_file input vcf file
+-p    popmap  tab-separated file of samples and population designations
+-h    hwe minimum Hardy-Weinberg p-value cutoff for SNPs
+-c    cutoff  proportion of all populations that a locus can be below HWE cutoff without being filtered
+-o    out name of outfile
 ```
 
-Next we will filter the SNPs based on Hardy-Weinberg equilibrium 
-
-```R
-# filter for HWE
-system(paste("./filter_hwe_by_pop.pl -v example_66k_n219_maf05_maxmissing95.recode.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n219_maf05_maxmissing95_hwe"))
- 
-#filter_hwe_by_pop.pl -v <vcffile> -p <popmap> [options]
-#
-#    Options: -v <vcffile> input vcf file -p <popmap> tab-separated file of
-#    samples and population designations -h [hwe] minimum Hardy-Weinberg
-#    p-value cutoff for SNPs -c [cutoff] proportion of all populations that a
-#    locus can be below HWE cutoff without being filtered -o [out] name of outfile
-
+```r
+# load R.utils
+library(R.utils)
+# uncompressed the vcf.gz
+gunzip("./example_66k_n125_missing95_mac6.vcf.gz", remove=FALSE)
+# filter_hwe_by_pop.pl for SNP HWE filtering. The input is vcf file after minor allele count and missing rate filtering.
+system(paste("./filter_hwe_by_pop.pl -v example_66k_n125_missing95_mac6.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n125_missing95_mac6_hwe"))
 # Processing population: LIW1 (31 inds)
 # Processing population: LIW2 (30 inds)
 # Processing population: NEH1 (32 inds)
 # Processing population: NEH2 (32 inds)
 # Outputting results of HWE test for filtered loci to 'filtered.hwe'
-# Kept 53978 of a possible 55515 loci (filtered 1537 loci)
-```
- 
-Then we evaluate the vcf file for indiviaul call rate, SNP call rate, and the allele frequency distribution
-
-```R
-# evaluate the invidual missing rate, SNP call rate and allele frequency distribution
-system(paste(vcftools," --vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf --missing-indv --out example_66k_n219_maf05_maxmissing95_hwe")
-system(paste(vcftools,"  --vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf --missing-site --out example_66k_n219_maf05_maxmissing95_hwe")
-system(paste(vcftools,"  --vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf --freq2 --max-alleles 2 --out example_66k_n219_maf05_maxmissing95_hwe")
+# Kept 60024 of a possible 61561 loci (filtered 1537 loci)
 ```
 
-Usually we want to perform population analyses on indepedent and neutral SNP, here we will perform a LD-clumping step.
+### Step 4 (Optional):
+#### Making a linkage-disequilibrium (LD) clumped vcf
+
+Linkage disequilibrium can particularly bias the downstrem population genetic analysis. SNPs in LD can be due to regions of low-recombination, variable SNP density, structural rearrangements, selection, etc. A good practice to assess neutral structure is to use a LD-clumping set of indepedent SNPs. Because this step involves a lot of steps and requrie a basic understanding of Plink usage. We will skip this step. However, I have already created a vcf file after LD-clumping and randomly seleted 10K SNPs for the following population genetic analysis.
 
 ```R
+library(bigsnpr)
+plink  = "/Users/HG/Dropbox/Mac/Documents/HG/Domestication/14_ROH/plink";
+vcftools  = "/Users/HG/Dropbox/Mac/Documents/HG/Github/BioinfoTools/vcftools_0.1.13/bin/vcftools";
+
+system(paste(plink, " --vcf example_66k_n125_missing95_mac6_hwe.recode.vcf --allow-extra-chr --make-bed --out example_66k_n125_missing95_mac6_hwe", sep=""))
 # LD clumping 
-f_name="example_66k_n219_maf05_maxmissing95_hwe"
+f_name="example_66k_n125_missing95_mac6_hwe"
 f_bk = paste0(f_name, ".bk")
 if (file.exists(f_bk)) {
   #Delete file if it exists
   file.remove(f_bk)
 }
-
 snp_readBed(paste0(f_name, ".bed"))
 # this will create a .rds file
 obj.bigSNP <- snp_attach(paste0(f_name, ".rds"))
@@ -434,73 +415,75 @@ POS <- obj.bigSNP$map$physical.pos
 #big_counts(G, ind.col = 1:dim(G)[1]) # normally the data include missing values
 # genotype imputation
 G <- snp_fastImputeSimple(G, method = c("mean0"), ncores = 8) # mean0 is based on rounded mean
-#big_counts(G, ind.col = 1:dim(G)[1]) # check if NAs are 0
 # LD clumping using r2 = 0.2
 newpc <- snp_autoSVD(G, infos.chr = CHR, infos.pos = POS, thr.r2 = 0.2, size = 10) # size is the window size of 10K
 # extract SNPs after clumpping
 which_pruned = attr(newpc, 'subset')
 keep_snp_ids = SNPs[which_pruned]
-write.table(keep_snp_ids, file = paste0(f_name, "_thinned_SNP.txt"), sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(keep_snp_ids, file = paste0(f_name, "_clump_SNP.txt"), sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 print(paste0("SNPs after clumpping is: ", length(keep_snp_ids), " out of ", dim(obj.bigSNP$map)[1]))
-
-# generate thinned vcf file
-system(paste(vcftools," --vcf ",f_name,".recode.vcf", " --snps ", f_name, "_thinned_SNP.txt", " --recode --recode-INFO-all --out ", f_name, "_thinned", sep=""))
-
+# "SNPs after clumpping is: 45675 out of 60024"
+# generate random 1K SNP dataset after LD-clumping
+system(paste(vcftools," --vcf ",f_name,".recode.vcf --snps example_66k_n125_missing95_mac6_hwe_LD_clump_1K.txt --recode --recode-INFO-all --out ", f_name, "_LD_clump", sep=""))
 # VCFtools - v0.1.13
 # (C) Adam Auton and Anthony Marcketta 2009
 
 # Parameters as interpreted:
-# 	--vcf example_66k_n219_maf05_maxmissing95_hwe.recode.vcf
-# 	--recode-INFO-all
-# 	--out example_66k_n219_maf05_maxmissing95_hwe_thinned
-# 	--recode
-# 	--snps example_66k_n219_maf05_maxmissing95_hwe_thinned_SNP.txt
+#   --vcf example_66k_n125_missing95_mac6_hwe.recode.vcf
+#   --recode-INFO-all
+#   --out example_66k_n125_missing95_mac6_hwe_LD_clump
+#   --recode
+#   --snps example_66k_n125_missing95_mac6_hwe_LD_clump_1K.txt
 
-# After filtering, kept 219 out of 219 Individuals
+# After filtering, kept 125 out of 125 Individuals
 # Outputting VCF file...
-# After filtering, kept 46008 out of a possible 55462 Sites
-# Run Time = 3.00 seconds
-
+# After filtering, kept 1000 out of a possible 60024 Sites
+# Run Time = 0.00 seconds
 ```
  
 ## Part2: Principal component analysis (PCA) 
 
-```R
-library(SNPRelate)
-library(ggplot2)
-# load vcf file 
-vcf.fn <- "example_66k_n219_maf05_maxmissing95_hwe_thinned.recode.vcf"
-# VCF => GDS
-snpgdsVCF2GDS(vcf.fn, "example_66k_n219_maf05_maxmissing95_hwe_thinned.recode.gds", method="biallelic.only")
-# summary
-snpgdsSummary("example_66k_n219_maf05_maxmissing95_hwe_thinned.recode.gds")
-# Open the GDS file
-genofile <- snpgdsOpen("example_66k_n219_maf05_maxmissing95_hwe_thinned.recode.gds")
-# PCA function
-pca <- snpgdsPCA(genofile,autosome.only=FALSE)
-pc.percent <- pca$varprop*100
-head(round(pc.percent, 2))
-# For data sets with a handful of dimensions, one typically retains the first few PCs. 
-tab <- data.frame(sample.id = pca$sample.id,
-                  EV1 = pca$eigenvect[,1],    # the first eigenvector
-                  EV2 = pca$eigenvect[,2],    # the second eigenvector
-                  EV3 = pca$eigenvect[,3],    # the second eigenvector
-                  EV4 = pca$eigenvect[,4],    # the second eigenvector
-                  stringsAsFactors = FALSE)
-print(tab)
-# output the tab contents for modification
-write.table(tab, "sample_eigen_219.txt", row.names=F, sep="\t", quote=F,col.names=T)
-tab_pop = read.delim("sample_eigen_219.txt", header = TRUE, sep='\t')
-tab_pop$pop = stringr::str_remove(tab_pop$sample.id, "-[0-9]+")
+One of the basic thing in population genetics is to assess the genetic structure across the samples. It can be done by looking into PCA or STRUCTURE/ADMIXTURE analysis, as well as by looking into pairwise Fst between populations. 
 
-ggplot(tab_pop, aes(x = EV1, y = EV2)) + 
-  geom_point(size=2, aes(color=pop), alpha = 0.8)+
-  guides(fill = guide_legend(override.aes=list(shape=17)))+
-  scale_x_continuous(paste("PC1 (",round(pc.percent[1],3),"%", ")",sep="")) + 
-  scale_y_continuous(paste("PC2 (",round(pc.percent[2],3),"%",")",sep=""))
+Population structure leads to systematic difference between individuals, which is often visualized using dimension reduction techniques such as principal component analysis (PCA). The results of PCA can show genetic clusters that reflect the genetic variation across geographical location or seletive breeding process in our case. Using PCA in genomics is quite simple without the need to diving into the math.
+
+```R
+library(SNPfiltR)
+library(vcfR)
+
+#read in vcf as vcfR
+vcfR <- read.vcfR("./example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf")
+
+#generate popmap file. Two column popmap with 'id' and 'pop'
+popmap<-data.frame(id=colnames(vcfR@gt)[2:length(colnames(vcfR@gt))],pop=substr(colnames(vcfR@gt)[2:length(colnames(vcfR@gt))], 1,4))
+
+#check the first few content in popmap
+head(popmap)
+#        id  pop
+# 1  LIW2-4 LIW2
+# 2 LIW2-12 LIW2
+# 3 LIW2-20 LIW2
+# 4 LIW2-28 LIW2
+# 5  LIW1-5 LIW1
+# 6 LIW1-13 LIW1
+
+# This PCA function in SNPfiltR can be run in two ways: 1) Without ’thresholds’ specified. This will run a PCA for
+# the input vcf without filtering, and visualize the clustering of samples in two-dimensional space,
+# coloring each sample according to a priori population assignment given in the popmap. 2) With
+# ’thresholds’ specified. This will filter your input vcf file to the specified missing data thresholds, and
+# run a PCA for each filtering iteration. For each iteration, a 2D plot will be output showing clustering
+# according to the specified popmap. This option is ideal for assessing the effects of missing data on
+# clustering patterns. Here we only perform PCA analysis without any threshold because we already did filtering. 
+assess_missing_data_pca(vcfR=vcfR, popmap = popmap, thresholds=NULL,clustering = FALSE)
+# PC1         PC2          PC3          PC4         PC5          PC6  pop missing
+# LIW2-4  -1.852227 -1.05170167  0.247838364 -0.863061906  0.24017122 -0.683284771 LIW2   0.021
+# LIW2-12 -2.626299 -0.15541527  0.326833089 -0.003319538  0.50306522 -0.546013466 LIW2   0.012
+# LIW2-20 -2.650282 -0.06764961  0.258587792  0.323243020  0.19597806  0.562968446 LIW2   0.005
+# LIW2-28 -2.397931 -0.41782601  0.232969544  0.284140457  0.62197105  0.160899188 LIW2   0.007
+# LIW1-5  -2.629874  0.27033184  0.836668673 -0.374729046  0.03233905 -0.450838278 LIW1   0.009
 ```
 
-![result](./p2.jpeg)
+![result](./PCA_1.jpeg)
 
 ## Part3: Population structure
 
