@@ -182,11 +182,11 @@ Within each block below we'll keep some flexibility to have questions or discuss
 `Mac`\
 Double-click on the zipped file to unzip HSRL_workshop.zip file on your Mac
 
-![result](./unzip_Mac.png)
+![result](./Figures//unzip_Mac.png)
 
 `Windows`\
 Right-click - Extract All\
-![result](./unzip_Windows.png)
+![result](./Figures//unzip_Windows.png)
 
 
 ### Step 2: set up the working directory
@@ -198,10 +198,10 @@ setwd("~/Desktop/HSRL_workshop")
 Or click Session-Set Working Directory-Choose Directory and direct to HSRL_workshop in the Desktop
 
 `Mac`\
-![result](./Seesion_Mac.png)
+![result](./Figures//Seesion_Mac.png)
 
 `Windows`\
-![result](./Seesion_Windows.png)
+![result](./Figures//Seesion_Windows.png)
 
 ## Part1: Handling SNP array data: VCF filtering and formatting
 
@@ -300,7 +300,7 @@ missing_by_snp(vcfR)
 # 11 1.00 0.000000000         29965
 ```
 
-![result](./SNP_completeness_vs_sample_missing.jpeg)
+![result](./Figures//SNP_completeness_vs_sample_missing.jpeg)
 
 
 Choose a value that retains an acceptable amount of missing data in each SNP, here we require that each SNP with <5% missing data
@@ -310,7 +310,7 @@ vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 # 1.66% of SNPs fell below a completeness cutoff of 0.95 and were removed from the VCF
 ```
 
-![result](./SNP_completeness_cutoff.jpeg)
+![result](./Figures//SNP_completeness_cutoff.jpeg)
 
 Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
 ```r
@@ -453,7 +453,7 @@ assess_missing_data_pca(vcfR=vcfR, popmap = popmap, thresholds=NULL,clustering =
 # LIW1-5  -2.629874  0.27033184  0.836668673 -0.374729046  0.03233905 -0.450838278 LIW1   0.009
 ```
 
-![result](./PCA_1.jpeg)
+![result](./Figures//PCA_1.jpeg)
 
 ## Part3: Admixture analysis
 
@@ -485,7 +485,7 @@ obj <- snmf("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.geno", 
 plot(obj, col = "blue4", cex = 1.4, pch = 19) #---best is 2 here
 ```
 
-![result](./No_K.jpeg)
+![result](./Figures//No_K.jpeg)
 
 ```r
 #choose the best LEA run
@@ -501,7 +501,7 @@ axis(1, at = 1:length(bp$order),
      cex.axis = .5)
 ```
 
-![result](./Ancestry_pro.jpeg)
+![result](./Figures//Ancestry_pro.jpeg)
 
 ## Part4: Fst statistics
 
@@ -532,7 +532,7 @@ plot_dt
 pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwise FST")
 ```
 
-![result](./FST.jpeg)
+![result](./Figures//FST.jpeg)
 
 
 ## Part5: Genetic diversity (Heterozygosity and Allelic Richness)
