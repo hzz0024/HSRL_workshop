@@ -3,6 +3,14 @@
 This repository includes scripts and data associated with the practical sessions of population genetic analyses\
 Prepared by Honggang Zhao, with helps from Matt Hare lab.
 
+## Download the example data and scripts
+
+To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/blob/main/HSRL_workshop.zip)
+
+Then unpacked the .zip file in your Desktop
+
+Double click the `HSRL_workshop.R` to load the script in RStudio. Or you can download the R script directly [here](https://github.com/hzz0024/HSRL_workshop/blob/main/HSRL_workshop.R) and open it by double-clicking.
+
 ## Installation of R/RStudio
 
 All the tutorial can be completed with the R/Rstudio. We encourge you to pre-install the R packages and look over related tutorials that needed for data analyses. 
