@@ -7,7 +7,7 @@ Prepared by Honggang Zhao, with helps from Matt Hare lab.
 
 To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/raw/main/HSRL_workshop.zip). 
 
-Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [here](#Part0:-set-up-the-working-directory-for-RStudio) for detailed steps.
+Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [here](#Part0) for detailed steps.
 
 Double click the `HSRL_workshop.R` to load the script in RStudio. 
 
@@ -185,7 +185,8 @@ library(bigsnpr)
 
 Within each block below we'll keep some flexibility to have questions or discussion.
 
-## Part0: set up the working directory for RStudio
+## Part0 
+## set up the working directory for RStudio
 
 ### Step 1: Unzip the compressed file at Desktop
 
@@ -199,7 +200,8 @@ Right-click - Extract All\
 ![result](./Figures//unzip_Windows.png)
 
 
-### Step 2: set up the working directory
+### Step2 
+## set up the working directory
 ```
 #set up the working directory
 setwd("~/Desktop/HSRL_workshop")
@@ -213,7 +215,8 @@ Or click Session-Set Working Directory-Choose Directory and direct to HSRL_works
 `Windows`\
 ![result](./Figures//Seesion_Windows.png)
 
-## Part1: Handling SNP array data: VCF filtering and formatting
+## Part1
+## Handling SNP array data: VCF filtering and formatting
 
 
 The Variant Call Format (VCF) file is a data format produced by variant calling software (e.g. Axiom Analysis Suite, GATK, FreeBayes, SAMtools). It contains the information for polymorphic loci (variants) present in the sample or population. The variants can be single nucleotide polymorphism (SNP) or a stretch of insertions or deletions (INDEL). In the VCF file, the variant data is normally represented by 8 columns (#CHROM, POS, ID, REF, ALT, QUAL, FILTER and INFO). The INFO columns contain additional information about the variants, for details of the columns headers please see [here](https://www.reneshbedre.com/blog/vcf-fields.html). 
@@ -229,8 +232,7 @@ Detailed information for four populations,
 | Rutgers NEH 19N1357                        | NEH1 | 32 | High, 18-23 | Selected line   |
 | Rutgers NEH 20N1                           | NEH2 | 32 | High, 18-23 | Selected line   |
 
-### Step 1:
-
+### Step1
 #### load vcf using SNPfiltR and snpR
 
 ```r
@@ -288,7 +290,7 @@ head(popmap)
 # 6 LIW1-13 LIW1
 ```
 
-### Step 2:
+### Step2
 #### Quality filtering for missing data and minor allele counts
 
 Checking missing data by SNP and the effect of various cutoffs on the missingness of each sample
@@ -333,7 +335,7 @@ Write out vcf files for downstream analyses.
 vcfR::write.vcf(vcf_missing_mac, "./example_66k_n125_missing95_mac6.vcf.gz")
 ```
 
-### Step 3 (Optional):
+### Step3 (Optional):
 #### Quality filter the SNPs based on Hardy-Weinberg equilibrium (HWE). 
 
 Here we will use a Perl script from dDocent pipeline to filter out SNPs based on HWE. The HWE test is not supposed to be conducted across the board, since population structure will create departures from HWE. We need to apply this by population. This script is a Perl wrapper for vcftools. One need to install the vcftools before running the script. Therefore this step 3 is an optional step. 
@@ -365,7 +367,7 @@ system(paste("./Script/filter_hwe_by_pop.pl -v example_66k_n125_missing95_mac6.v
 # Kept 60024 of a possible 61561 loci (filtered 1537 loci)
 ```
 
-### Step 4 (Optional):
+### Step4 (Optional):
 #### Making a linkage-disequilibrium (LD) clumped vcf
 
 Linkage disequilibrium can particularly bias the downstrem population genetic analysis. SNPs in LD can be due to regions of low-recombination, variable SNP density, structural rearrangements, selection, etc. A good practice to assess neutral structure is to use a LD-clumping set of indepedent SNPs. Because this step involves a lot of steps and requrie a basic understanding of Plink usage. We will skip this step. However, I have already created a vcf file after LD-clumping and randomly seleted 10K SNPs for the following population genetic analysis.
@@ -420,7 +422,8 @@ system(paste(vcftools," --vcf ",f_name,".recode.vcf --snps example_66k_n125_miss
 # Run Time = 0.00 seconds
 ```
  
-## Part2: Principal component analysis (PCA) 
+## Part2
+## Principal component analysis (PCA) 
 
 One of the basic thing in population genetics is to assess the genetic structure across the samples. It can be done by looking into PCA or STRUCTURE/ADMIXTURE analysis, as well as by looking into pairwise Fst between populations. 
 
@@ -465,7 +468,8 @@ assess_missing_data_pca(vcfR=vcfR, popmap = popmap, thresholds=NULL,clustering =
 
 ![result](./Figures//PCA_1.jpeg)
 
-## Part3: Admixture analysis
+## Part3
+## Admixture analysis
 
 Next we will examine the individual admixture coefficients using the snmf function in LEA package. This function provides results that are very similar to programs such as STRUCTURE or Admixture. Assuming K ancestral populations, the function snmf provides least-squares estimates of ancestry proportions rather than maximum likelihood estimates (Frichot 2014). The results allow us to determine what is the best K value, i.e. the most likely number of genetic clusters.
 
@@ -513,7 +517,8 @@ axis(1, at = 1:length(bp$order),
 
 ![result](./Figures//Ancestry_pro.jpeg)
 
-## Part4: Fst statistics
+## Part4
+## Fst statistics
 
 FST is a relative measure of population differentiation. There are many software and formulas for FST estimation. Here we estimates pairwise FST according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
 
@@ -545,7 +550,8 @@ pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwi
 ![result](./Figures//FST.jpeg)
 
 
-## Part5: Genetic diversity (Heterozygosity and Allelic Richness)
+## Part5
+## Genetic diversity (Heterozygosity and Allelic Richness)
 
 Genetic diversity is generally assessed by means of neutral molecular markers, and it is usually quantified by the expected heterozygosity under Hardy-Weinberg equilibrium and the number of alleles per locus or allelic richness.
 
