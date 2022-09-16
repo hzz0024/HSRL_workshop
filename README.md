@@ -5,11 +5,13 @@ Prepared by Honggang Zhao, with helps from Matt Hare lab.
 
 ## Download the example data and scripts
 
-To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/blob/main/HSRL_workshop.zip)
+To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/raw/main/HSRL_workshop.zip)
 
-Then unpacked the .zip file in your Desktop
+Then unpacked the .zip file in your Desktop by double-clicking the .zip file.
 
-Double click the `HSRL_workshop.R` to load the script in RStudio. Or you can download the R script directly [here](https://github.com/hzz0024/HSRL_workshop/blob/main/HSRL_workshop.R) and open it by double-clicking.
+Double click the `HSRL_workshop.R` to load the script in RStudio. 
+
+Or you can copy the R codes directly from [here](https://github.com/hzz0024/HSRL_workshop/blob/main/HSRL_workshop.R), and paste it to RStudio. To create a new R script, one needs to click `File - New File - R Script`
 
 ## Installation of R/RStudio
 
