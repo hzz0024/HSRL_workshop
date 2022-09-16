@@ -5,12 +5,12 @@ Prepared by Honggang Zhao, with helps from Matt Hare lab.
 
 ## Overall contents
 
-[Part 0](#Part0): Download the example data and scripts
-[Part 0](#Part0): Set up the working directory for RStudio
-[Part 1](#Part1): Handling SNP array data: VCF filtering and formatting
-[Part 2](#Part2): Principal component analysis (PCA) 
-[Part 3](#Part3): Admixture analysis
-[Part 4](#Part4): Population differentiation using Fst statistics
+[Part 0](#Part0): Download the example data and scripts\
+[Part 0](#Part0): Set up the working directory for RStudio\
+[Part 1](#Part1): Handling SNP array data: VCF filtering and formatting\
+[Part 2](#Part2): Principal component analysis (PCA)\
+[Part 3](#Part3): Admixture analysis\
+[Part 4](#Part4): Population differentiation using Fst statistics\
 [Part 5](#Part5): Genetic diversity (Heterozygosity and Allelic Richness)
 
 ## Download the example data and scripts
