@@ -13,15 +13,6 @@ Prepared by Honggang Zhao, with helps from Matt Hare lab.
 [Part 4](#Part4): Population differentiation using Fst statistics\
 [Part 5](#Part5): Genetic diversity (Heterozygosity and Allelic Richness)
 
-## Download the example data and scripts
-
-To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/raw/main/HSRL_workshop.zip). 
-
-Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [Part0](#Part0) for detailed steps.
-
-Double click the `HSRL_workshop.R` to load the script in RStudio. 
-
-Or you can copy the R codes directly from [here](https://github.com/hzz0024/HSRL_workshop/blob/main/HSRL_workshop.R), and paste it to RStudio. To create a new R script, one needs to click `File - New File - R Script`
 
 ## Installation of R/RStudio
 
@@ -37,6 +28,16 @@ All the tutorial can be completed with the R/Rstudio. We encourge you to pre-ins
 
 Important note for Windows user:\
 [Rtools](https://cran.r-project.org/bin/windows/Rtools/): RTools is a set of programs that is required on Windows to build R packages from source. You can download it from [here](https://cran.r-project.org/bin/windows/Rtools/rtools40.html) and install it follow the steps. Alternatively, it will be automativly installed or updated during the BioCManager installation process.
+
+## Download the example data and scripts
+
+To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/raw/main/HSRL_workshop.zip). 
+
+Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [Part0](#Part0) for detailed steps.
+
+Double click the `HSRL_workshop.R` to load the script in RStudio. 
+
+Or you can copy the R codes directly from [here](https://github.com/hzz0024/HSRL_workshop/blob/main/HSRL_workshop.R), and paste it to RStudio. To create a new R script, one needs to click `File - New File - R Script`
 
 ## Cheatsheet for R code
 [Cheatsheet](https://www.rstudio.com/resources/cheatsheets/)
