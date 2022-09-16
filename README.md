@@ -7,7 +7,7 @@ Prepared by Honggang Zhao, with helps from Matt Hare lab.
 
 To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/raw/main/HSRL_workshop.zip). 
 
-Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [here](# Part0: set up the working directory for RStudio) for detailed steps.
+Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [here](#Part0:-set-up-the-working-directory-for-RStudio) for detailed steps.
 
 Double click the `HSRL_workshop.R` to load the script in RStudio. 
 
