@@ -3,11 +3,21 @@
 This repository includes scripts and data associated with the practical sessions of population genetic analyses\
 Prepared by Honggang Zhao, with helps from Matt Hare lab.
 
+## Overall contents
+
+[Part 0](#Part0): Download the example data and scripts
+[Part 0](#Part0): Set up the working directory for RStudio
+[Part 1](#Part1): Handling SNP array data: VCF filtering and formatting
+[Part 2](#Part2): Principal component analysis (PCA) 
+[Part 3](#Part3): Admixture analysis
+[Part 4](#Part4): Population differentiation using Fst statistics
+[Part 5](#Part5): Genetic diversity (Heterozygosity and Allelic Richness)
+
 ## Download the example data and scripts
 
 To start, please download the example data and R script [here](https://github.com/hzz0024/HSRL_workshop/raw/main/HSRL_workshop.zip). 
 
-Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [here](#Part0) for detailed steps.
+Then unpacked the .zip file in your Desktop by double-clicking the .zip file. See [Part0](#Part0) for detailed steps.
 
 Double click the `HSRL_workshop.R` to load the script in RStudio. 
 
@@ -186,9 +196,10 @@ library(bigsnpr)
 Within each block below we'll keep some flexibility to have questions or discussion.
 
 ## Part0 
-## set up the working directory for RStudio
+## Set up the working directory for RStudio
 
-### Step 1: Unzip the compressed file at Desktop
+### Step1
+### Unzip the compressed file at Desktop
 
 `Mac`\
 Double-click on the zipped file to unzip HSRL_workshop.zip file on your Mac
@@ -518,7 +529,7 @@ axis(1, at = 1:length(bp$order),
 ![result](./Figures//Ancestry_pro.jpeg)
 
 ## Part4
-## Fst statistics
+## Population differentiation using Fst statistics
 
 FST is a relative measure of population differentiation. There are many software and formulas for FST estimation. Here we estimates pairwise FST according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
 
