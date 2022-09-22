@@ -336,12 +336,6 @@ vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 
 ![result](./Figures//SNP_completeness_cutoff.jpeg)
 
-Filtering based on minor allele count. Here we used a setting of minor allele count 6, which roughly equal to minor allele frequency of 5% (125*0.05=6.25)
-```r
-vcf_missing_mac = min_mac(vcfR_missing, min.mac = 6)
-# 5% of SNPs fell below a minor allele count of 6 and were removed from the VCF
-``` 
-
 Write out vcf files for downstream analyses.
 ```r
 vcfR::write.vcf(vcf_missing_mac, "./example_66k_n125_missing95_mac6.vcf.gz")
