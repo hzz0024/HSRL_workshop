@@ -303,7 +303,7 @@ head(popmap)
 ```
 
 ### Step2
-#### Quality filtering for missing data and minor allele counts
+#### Quality filtering for missing data
 
 Checking missing data by SNP and the effect of various cutoffs on the missingness of each sample
 ```r
