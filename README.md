@@ -586,7 +586,103 @@ axis(1, at = 1:length(bp$order),
 
 ## Other important analyses and pacakge:
 
-Relatedness - [Demerelate](https://www.rdocumentation.org/packages/Demerelate/versions/0.9-2/topics/Demerelate)
+### Relatedness - [Demerelate](https://www.rdocumentation.org/packages/Demerelate/versions/0.9-2/topics/Demerelate)
+
+```R
+Demerelate(Input, ref.pop="NA",
+           tab.dist="NA", Fis=FALSE, NA.rm=FALSE,
+           object=TRUE, pairs=1000, iteration=100,
+           value="ritland", file.output=TRUE
+```
+
+### PCA analysis using LD-pruned SNPs and unrelated samples
+
+```R
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("GENESIS")
+library(SNPRelate)
+library(GENESIS)
+library(ggplot2)
+
+# estimate kinship among individuals (in linux)
+/programs/plink2_linux_avx2_20220129/plink2 --vcf example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf --update-ids sample_info.txt --allow-extra-chr --make-bed --out example_66k_n125_missing95_mac6_hwe_LD_clump.recode
+# using King software to calculate kinship
+/programs/king-2.2.5/king -b example_66k_n125_missing95_mac6_hwe_LD_clump.recode.bed --kinship 
+
+# Below are R script for PCA using LD-pruned SNPs and unrelated samples
+# input name
+input = "example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf"
+# VCF => GDS
+snpgdsVCF2GDS(input, paste0(input, ".gds"), method="biallelic.only")
+# Summary of the data
+snpgdsSummary(paste0(input, ".gds"))
+# The total number of samples: 125 
+# The total number of SNPs: 1000 
+# SNP genotypes are stored in SNP-major mode (Sample X SNP).
+# Open the GDS file
+gds <- snpgdsOpen(paste0(input, ".gds"))
+# Before running PCA, we use LD pruning to select a set of independent SNPs for analysis. We use the snpgdsLDpruning in the SNPRelate package, which returns a list of snp IDs
+snpset <- snpgdsLDpruning(gds, method="corr", slide.max.bp=1e5, 
+                          ld.threshold=0.2, verbose=FALSE)
+pruned <- unlist(snpset, use.names=FALSE)
+# see how many SNP retained after LD-pruning
+length(pruned)
+# Create matrix of KING estimates
+KINGmat <- kingToMatrix(
+  c("king.kin", "king.kin0"), # the king.kin and king.kin0 are output from King
+  estimator = "Kinship")
+KINGmat[1:5,1:5]
+# find out the unrelated subsets
+part <- pcairPartition(kinobj = KINGmat, divobj = NULL)
+# number of individual in the unrelated subset
+length(part$unrels)
+# # If kinobj is specified, and divobj = NULL, then kinobj is used to define the unrelated set but ancestry divergence is ignored.
+pc_df <- pcair(gds, kinobj = KINGmat, divobj = NULL, snp.include = pruned)
+# summary(mypcair)
+plot(pc_df)
+# format for PC values
+pc.percent <- pc_df$values
+head(round(pc.percent, 2))
+# extract unrelated subset
+pc_df_unrels <- pc_df$vectors[row.names(pc_df$vectors) %in% part$unrels,]
+
+tab1 <- data.frame(sample.id = row.names(pc_df_unrels),
+                   EV1 = pc_df_unrels[,1],    # the first eigenvector
+                   EV2 = pc_df_unrels[,2],    # the second eigenvector
+                   EV3 = pc_df_unrels[,3],    # the third eigenvector
+                   EV4 = pc_df_unrels[,4],    # the fourth eigenvector
+                   pop = substr(row.names(pc_df_unrels), 1,4),
+                   stringsAsFactors = FALSE)
+# assign wild or selected label to individuals
+tab1$type[tab1$pop %in% "LIW1" | tab1$pop %in% "LIW2"] <- "Wild"
+tab1$type[tab1$pop %in% "NEH1" | tab1$pop %in% "NEH2"] <- "Selected"
+# check
+print(tab1)
+# set up the color for each population
+                    #  LIW1      LIW2         
+col_gradient <- c(  "#1D92BD", "#8ad5d9",
+                    #  NEH1       NEH2      
+                    ,"#e1bb94", "#fbd0a5")
+
+order1 = c("LIW1", "LIW2", "NEH1", "NEH2")
+tab1$pop <-factor(tab1$pop, levels=order1)
+# for 2 clusters
+order2 = c("Wild", "Selected")
+tab1$type <-factor(tab1$type, levels=order2)
+
+ggplot(tab1, aes(x = EV1, y = EV2)) + 
+  geom_point(size=2, aes(color=pop, shape=type), alpha = 0.8)+
+  scale_color_manual(values=col_gradient , name="Population/Line") +
+  scale_shape_manual(values=c(15, 17), name="Origin") +
+  guides(fill = guide_legend(override.aes=list(shape=17)))+
+  #scale_shape_manual(values=c(rep(15, 9), rep(17,8)))+
+  scale_x_continuous(paste("PC1 (",round(pc.percent[1],3),"%", ")",sep="")) + 
+  scale_y_continuous(paste("PC2 (",round(pc.percent[2],3),"%",")",sep=""))
+```
+
+
 
 
 
