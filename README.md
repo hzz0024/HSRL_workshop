@@ -371,7 +371,7 @@ system(paste("./Script/filter_hwe_by_pop.pl -v example_66k_n125_missing95.vcf -p
 # Processing population: NEH1 (32 inds)
 # Processing population: NEH2 (32 inds)
 # Outputting results of HWE test for filtered loci to 'filtered.hwe'
-# Kept 60024 of a possible 61561 loci (filtered 1537 loci)
+# Kept 63263 of a possible 64800 loci (filtered 1537 loci)
 ```
 
 ### Step4 (Optional):

@@ -74,7 +74,16 @@ vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 # 1.66% of SNPs fell below a completeness cutoff of 0.95 and were removed from the VCF
 
 # Write out vcf files for downstream analyses.
-vcfR::write.vcf(vcf_missing, "./example_66k_n125_missing95.vcf.gz")
+vcfR::write.vcf(vcfR_missing, "./example_66k_n125_missing95.vcf.gz")
+
+
+# load R.utils
+library(R.utils)
+# uncompressed the vcf.gz
+gunzip("./example_66k_n125_missing95.vcf.gz", remove=FALSE)
+# filter_hwe_by_pop.pl for SNP HWE filtering. The input is vcf file after minor allele count and missing rate filtering.
+system(paste("./Script/filter_hwe_by_pop.pl -v example_66k_n125_missing95.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n125_missing95_hwe"))
+
 
 ## Part2: Principal component analysis (PCA) ----------------
 library(SNPfiltR)
