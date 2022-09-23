@@ -9,9 +9,9 @@ Prepared by Honggang Zhao, with helps from Matt Hare lab.
 [Part 0](#Part0): Set up the working directory for RStudio\
 [Part 1](#Part1): Handling SNP array data: VCF filtering and formatting\
 [Part 2](#Part2): Principal component analysis (PCA)\
-[Part 3](#Part3): Admixture analysis\
-[Part 4](#Part4): Population differentiation using Fst statistics\
-[Part 5](#Part5): Genetic diversity (Heterozygosity and Allelic Richness)
+[Part 3](#Part3): Population differentiation using Fst statistics\
+[Part 4](#Part4): Genetic diversity (Heterozygosity and Allelic Richness)\
+[Part 5](#Part5): Admixture analysis\
 
 
 ## Installation of R/RStudio
@@ -338,7 +338,7 @@ vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 
 Write out vcf files for downstream analyses.
 ```r
-vcfR::write.vcf(vcf_missing_mac, "./example_66k_n125_missing95_mac6.vcf.gz")
+vcfR::write.vcf(vcf_missing_mac, "./example_66k_n125_missing95.vcf.gz")
 ```
 
 ### Step3 (Optional):
@@ -362,9 +362,9 @@ Options:
 # load R.utils
 library(R.utils)
 # uncompressed the vcf.gz
-gunzip("./example_66k_n125_missing95_mac6.vcf.gz", remove=FALSE)
+gunzip("./example_66k_n125_missing95.vcf.gz", remove=FALSE)
 # filter_hwe_by_pop.pl for SNP HWE filtering. The input is vcf file after minor allele count and missing rate filtering.
-system(paste("./Script/filter_hwe_by_pop.pl -v example_66k_n125_missing95_mac6.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n125_missing95_mac6_hwe"))
+system(paste("./Script/filter_hwe_by_pop.pl -v example_66k_n125_missing95.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n125_missing95_hwe"))
 # Processing population: LIW1 (31 inds)
 # Processing population: LIW2 (30 inds)
 # Processing population: NEH1 (32 inds)
@@ -383,9 +383,9 @@ library(bigsnpr)
 plink  = "/PATH TO/plink";
 vcftools  = "/PATH TO/vcftools";
 
-system(paste(plink, " --vcf example_66k_n125_missing95_mac6_hwe.recode.vcf --allow-extra-chr --make-bed --out example_66k_n125_missing95_mac6_hwe", sep=""))
+system(paste(plink, " --vcf example_66k_n125_missing95_hwe.recode.vcf --allow-extra-chr --make-bed --out example_66k_n125_missing95_hwe", sep=""))
 # LD clumping 
-f_name="example_66k_n125_missing95_mac6_hwe"
+f_name="example_66k_n125_missing95_hwe"
 f_bk = paste0(f_name, ".bk")
 if (file.exists(f_bk)) {
   #Delete file if it exists
@@ -411,16 +411,16 @@ write.table(keep_snp_ids, file = paste0(f_name, "_clump_SNP.txt"), sep = "\t", q
 print(paste0("SNPs after clumpping is: ", length(keep_snp_ids), " out of ", dim(obj.bigSNP$map)[1]))
 # "SNPs after clumpping is: 45675 out of 60024"
 # generate random 1K SNP dataset after LD-clumping
-system(paste(vcftools," --vcf ",f_name,".recode.vcf --snps example_66k_n125_missing95_mac6_hwe_LD_clump_1K.txt --recode --recode-INFO-all --out ", f_name, "_LD_clump", sep=""))
+system(paste(vcftools," --vcf ",f_name,".recode.vcf --snps example_66k_n125_missing95_hwe_LD_clump_1K.txt --recode --recode-INFO-all --out ", f_name, "_LD_clump", sep=""))
 # VCFtools - v0.1.13
 # (C) Adam Auton and Anthony Marcketta 2009
 
 # Parameters as interpreted:
-#   --vcf example_66k_n125_missing95_mac6_hwe.recode.vcf
+#   --vcf example_66k_n125_missing95_hwe.recode.vcf
 #   --recode-INFO-all
-#   --out example_66k_n125_missing95_mac6_hwe_LD_clump
+#   --out example_66k_n125_missing95_hwe_LD_clump
 #   --recode
-#   --snps example_66k_n125_missing95_mac6_hwe_LD_clump_1K.txt
+#   --snps example_66k_n125_missing95_hwe_LD_clump_1K.txt
 
 # After filtering, kept 125 out of 125 Individuals
 # Outputting VCF file...
@@ -440,7 +440,7 @@ library(SNPfiltR)
 library(vcfR)
 
 #read in vcf as vcfR
-vcfR <- read.vcfR("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf")
+vcfR <- read.vcfR("./Example_data/example_66k_n125_missing95_hwe_LD_clump.recode.vcf")
 
 #generate popmap file. Two column popmap with 'id' and 'pop'
 popmap<-data.frame(id=colnames(vcfR@gt)[2:length(colnames(vcfR@gt))],pop=substr(colnames(vcfR@gt)[2:length(colnames(vcfR@gt))], 1,4))
@@ -475,88 +475,6 @@ assess_missing_data_pca(vcfR=vcfR, popmap = popmap, thresholds=NULL,clustering =
 ![result](./Figures//PCA_1.jpeg)
 
 ## Part3
-## Admixture analysis
-
-Next we will examine the individual admixture coefficients using the snmf function in LEA package. This function provides results that are very similar to programs such as STRUCTURE or Admixture. Assuming K ancestral populations, the function snmf provides least-squares estimates of ancestry proportions rather than maximum likelihood estimates (Frichot 2014). The results allow us to determine what is the best K value, i.e. the most likely number of genetic clusters.
-
-```r
-# lead LEA package
-library(LEA)
-
-#change vcf to geno 
-LEA::vcf2geno("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf",
-              output.file = "example_66k_n125_missing95_mac6_hwe_LD_clump.geno")
-# - number of detected individuals: 125
-# - number of detected loci:    1000
-# 
-# For SNP info, please check example_66k_n125_missing95_mac6_hwe_LD_clump.vcfsnp.
-# 
-# 0 line(s) were removed because these are not SNPs.
-# Please, check example_66k_n125_missing95_mac6_hwe_LD_clump.removed file, for more informations.
-# 
-# [1] "example_66k_n125_missing95_mac6_hwe_LD_clump.geno"
-
-# modeling ancestry proportions for different K: from K=1 to K=10
-obj <- snmf("./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.geno", K = 1:10, ploidy = 2,
-            entropy = T, CPU =4, project = "new")
-
-
-# Find the best K from cross-entropy
-plot(obj, col = "blue4", cex = 1.4, pch = 19) #---best is 2 here
-```
-
-![result](./Figures//No_K.jpeg)
-
-```r
-#choose the best LEA run
-best = which.min(cross.entropy(obj, K = 2))
-
-# Plot ancestry proportions across samples
-barchart(obj, K=2,run=best,border=T,space=0,
-         col=c("grey","orange"), lab=tab_pop$pop,
-         xlab = "Individuals", ylab = "Ancestry proportions (K=2)") -> bp
-
-axis(1, at = 1:length(bp$order), 
-     labels = popmap[bp$order, "id"], las = 3, 
-     cex.axis = .5)
-```
-
-![result](./Figures//Ancestry_pro.jpeg)
-
-## Part4
-## Population differentiation using Fst statistics
-
-FST is a relative measure of population differentiation. There are many software and formulas for FST estimation. Here we estimates pairwise FST according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
-
-```R
-library(hierfstat)
-library(pheatmap)
-library(vcfR)
-
-# load vcf file and convert it to genind format
-vcf_file = "./Example_data/example_66k_n125_missing95_mac6_hwe_LD_clump.recode.vcf"
-vcf <- read.vcfR(vcf_file, verbose = FALSE)
-df <- vcfR2genind(vcf)
-df@pop <- factor(popmap$pop)
-# calculate pairwise FST using Weir and Cockerham (1984)
-pairwise_fst <- genet.dist(df, method = "WC84") # Estimates pairwise FSTs according to Weir and Cockerham (1984)
-# convert the output into matrix
-plot_dt <- as.matrix(pairwise_fst)
-plot_dt
-#           LIW1         LIW2       NEH1       NEH2
-# LIW1 0.0000000000 0.0001369757 0.07207295 0.08302061
-# LIW2 0.0001369757 0.0000000000 0.06707238 0.07771447
-# NEH1 0.0720729493 0.0670723811 0.00000000 0.01480227
-# NEH2 0.0830206064 0.0777144688 0.01480227 0.00000000
-
-# plot with heatmap
-pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwise FST")
-```
-
-![result](./Figures//FST.jpeg)
-
-
-## Part5
 ## Genetic diversity (Heterozygosity and Allelic Richness)
 
 Genetic diversity is generally assessed by means of neutral molecular markers, and it is usually quantified by the expected heterozygosity under Hardy-Weinberg equilibrium and the number of alleles per locus or allelic richness.
@@ -584,6 +502,87 @@ He
 #   LIW1    LIW2    NEH1    NEH2 
 # 0.31269 0.31558 0.30919 0.30327 
 ```
+
+## Part4
+## Population differentiation using Fst statistics
+
+FST is a relative measure of population differentiation. There are many software and formulas for FST estimation. Here we estimates pairwise FST according to Weir and Cockerham (1984). However, genet.dist function from hierfstat package can estimate some other genetic distances as described mostly in Takezaki & Nei (1996). See [https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist](https://www.rdocumentation.org/packages/hierfstat/versions/0.5-11/topics/genet.dist) for detailed information
+
+```R
+library(hierfstat)
+library(pheatmap)
+library(vcfR)
+
+# load vcf file and convert it to genind format
+vcf_file = "./Example_data/example_66k_n125_missing95_hwe_LD_clump.recode.vcf"
+vcf <- read.vcfR(vcf_file, verbose = FALSE)
+df <- vcfR2genind(vcf)
+df@pop <- factor(popmap$pop)
+# calculate pairwise FST using Weir and Cockerham (1984)
+pairwise_fst <- genet.dist(df, method = "WC84") # Estimates pairwise FSTs according to Weir and Cockerham (1984)
+# convert the output into matrix
+plot_dt <- as.matrix(pairwise_fst)
+plot_dt
+#           LIW1         LIW2       NEH1       NEH2
+# LIW1 0.0000000000 0.0001369757 0.07207295 0.08302061
+# LIW2 0.0001369757 0.0000000000 0.06707238 0.07771447
+# NEH1 0.0720729493 0.0670723811 0.00000000 0.01480227
+# NEH2 0.0830206064 0.0777144688 0.01480227 0.00000000
+
+# plot with heatmap
+pheatmap(plot_dt, display_numbers = T, cellwidth=40, cellheight=40, main="Pairwise FST")
+```
+
+![result](./Figures//FST.jpeg)
+
+## Part5
+## Admixture analysis
+
+Next we will examine the individual admixture coefficients using the snmf function in LEA package. This function provides results that are very similar to programs such as STRUCTURE or Admixture. Assuming K ancestral populations, the function snmf provides least-squares estimates of ancestry proportions rather than maximum likelihood estimates (Frichot 2014). The results allow us to determine what is the best K value, i.e. the most likely number of genetic clusters.
+
+```r
+# lead LEA package
+library(LEA)
+
+#change vcf to geno 
+LEA::vcf2geno("./Example_data/example_66k_n125_missing95_hwe_LD_clump.recode.vcf",
+              output.file = "example_66k_n125_missing95_hwe_LD_clump.geno")
+# - number of detected individuals: 125
+# - number of detected loci:    1000
+# 
+# For SNP info, please check example_66k_n125_missing95_hwe_LD_clump.vcfsnp.
+# 
+# 0 line(s) were removed because these are not SNPs.
+# Please, check example_66k_n125_missing95_hwe_LD_clump.removed file, for more informations.
+# 
+# [1] "example_66k_n125_missing95_hwe_LD_clump.geno"
+
+# modeling ancestry proportions for different K: from K=1 to K=10
+obj <- snmf("./Example_data/example_66k_n125_missing95_hwe_LD_clump.geno", K = 1:10, ploidy = 2,
+            entropy = T, CPU =4, project = "new")
+
+
+# Find the best K from cross-entropy
+plot(obj, col = "blue4", cex = 1.4, pch = 19) #---best is 2 here
+```
+
+![result](./Figures//No_K.jpeg)
+
+```r
+#choose the best LEA run
+best = which.min(cross.entropy(obj, K = 2))
+
+# Plot ancestry proportions across samples
+barchart(obj, K=2,run=best,border=T,space=0,
+         col=c("grey","orange"), lab=tab_pop$pop,
+         xlab = "Individuals", ylab = "Ancestry proportions (K=2)") -> bp
+
+axis(1, at = 1:length(bp$order), 
+     labels = popmap[bp$order, "id"], las = 3, 
+     cex.axis = .5)
+```
+
+![result](./Figures//Ancestry_pro.jpeg)
 
 ## Other important analyses and pacakge:
 
