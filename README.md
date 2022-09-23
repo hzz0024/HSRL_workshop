@@ -410,7 +410,7 @@ which_pruned = attr(newpc, 'subset')
 keep_snp_ids = SNPs[which_pruned]
 write.table(keep_snp_ids, file = paste0(f_name, "_clump_SNP.txt"), sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 print(paste0("SNPs after clumpping is: ", length(keep_snp_ids), " out of ", dim(obj.bigSNP$map)[1]))
-# "SNPs after clumpping is: 45675 out of 60024"
+# "SNPs after clumpping is: 45675 out of 64800"
 # generate random 1K SNP dataset after LD-clumping
 system(paste(vcftools," --vcf ",f_name,".recode.vcf --snps example_66k_n125_missing95_hwe_LD_clump_1K.txt --recode --recode-INFO-all --out ", f_name, "_LD_clump", sep=""))
 # VCFtools - v0.1.13
@@ -425,7 +425,7 @@ system(paste(vcftools," --vcf ",f_name,".recode.vcf --snps example_66k_n125_miss
 
 # After filtering, kept 125 out of 125 Individuals
 # Outputting VCF file...
-# After filtering, kept 1000 out of a possible 60024 Sites
+# After filtering, kept 1000 out of a possible 64800 Sites
 # Run Time = 0.00 seconds
 ```
  
