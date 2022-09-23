@@ -74,7 +74,7 @@ vcfR_missing<-missing_by_snp(vcfR, cutoff = .95)
 # 1.66% of SNPs fell below a completeness cutoff of 0.95 and were removed from the VCF
 
 # Write out vcf files for downstream analyses.
-vcfR::write.vcf(vcf_missing_mac, "./example_66k_n125_missing95.vcf.gz")
+vcfR::write.vcf(vcf_missing, "./example_66k_n125_missing95.vcf.gz")
 
 ## Part2: Principal component analysis (PCA) ----------------
 library(SNPfiltR)
