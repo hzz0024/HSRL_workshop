@@ -11,7 +11,8 @@ Prepared by Honggang Zhao, with helps from Matt Hare lab.
 [Part 2](#Part2): Principal component analysis (PCA)\
 [Part 3](#Part3): Population differentiation using Fst statistics\
 [Part 4](#Part4): Genetic diversity (Heterozygosity and Allelic Richness)\
-[Part 5](#Part5): Admixture analysis\
+[Part 5](#Part5): Admixture analysis
+[Part 6](#Part6): Other analyses
 
 
 ## Installation of R/RStudio
@@ -584,6 +585,7 @@ axis(1, at = 1:length(bp$order),
 
 ![result](./Figures//Ancestry_pro.jpeg)
 
+## Part6
 ## Other important analyses and pacakge:
 
 ### Relatedness - [Demerelate](https://www.rdocumentation.org/packages/Demerelate/versions/0.9-2/topics/Demerelate)
