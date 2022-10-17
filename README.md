@@ -364,7 +364,7 @@ Options:
 library(R.utils)
 # uncompressed the vcf.gz
 gunzip("./example_66k_n125_missing95.vcf.gz", remove=FALSE)
-# filter_hwe_by_pop.pl for SNP HWE filtering. The input is vcf file after minor allele count and missing rate filtering.
+# filter_hwe_by_pop.pl for SNP HWE filtering. The input is vcf file after missing rate filtering.
 system(paste("./Script/filter_hwe_by_pop.pl -v example_66k_n125_missing95.vcf -p popmap.txt -h 0.01 -c 0.5 -o example_66k_n125_missing95_hwe"))
 # Processing population: LIW1 (31 inds)
 # Processing population: LIW2 (30 inds)
